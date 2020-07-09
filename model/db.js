@@ -27,7 +27,7 @@ if (username) {
 
 	opt = {
 		auth:{
-			authdb:"admin"
+			authSource:"admin"
 		},
 	  	useNewUrlParser: true,
 	  	useCreateIndex: true,
