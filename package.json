@@ -1,0 +1,48 @@
+{
+  "name": "tlg",
+  "version": "1.1.4",
+  "description": "NodeJS client for the Telegram's tdlib",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dilongfa/node-tlg.git"
+  },
+  "keywords": [
+    "tlg",
+    "node-tlg",
+    "tdl",
+    "telegram",
+    "tdlib",
+    "libtdjson",
+    "nodejs",
+    "node-tdlib",
+    "node-telegram",
+    "telegram-client",
+    "telegram-bot",
+    "telegram-api",
+    "telegram-cli"
+  ],
+  "author": "DiLong Fa <dilongfa@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dilongfa/node-tlg/issues"
+  },
+  "homepage": "https://github.com/dilongfa/node-tlg#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.4",
+    "ffi-napi": "2.4.4",
+    "jsonwebtoken": "^8.1.0",
+    "md5": "^2.2.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.1",
+    "node-cache": "^4.2.0",
+    "node-schedule": "^1.3.2",
+    "nodemon": "^1.18.9",
+    "redis": "^3.0.2"
+  }
+}
