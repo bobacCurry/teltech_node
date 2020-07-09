@@ -40,6 +40,8 @@ let clear_push = schedule.scheduleJob('*/5 * * * * *', async (error, stdout, std
 		return 
 	}
 
+	console.log(childnum,1111)
+
 	childnum++
 
 	const clear_push_cron = child_process.exec('node cron/clear_push.js',{timeout:60000})
@@ -57,6 +59,8 @@ let join_chat = schedule.scheduleJob('*/20 * * * * *',async (error, stdout, stde
 
 		return 
 	}
+
+	console.log(childnum,2222)
 
 	childnum++
 
