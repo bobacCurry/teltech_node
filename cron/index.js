@@ -12,7 +12,9 @@ const config = require('../config')
 
 const maxchild = config.env.maxchild
 
-let childnum = 0
+let clear_push_childnum = 0
+
+let join_chat_childnum = 0
 
 let add_push = schedule.scheduleJob('0 * * * * *', async () => {
 
@@ -35,40 +37,36 @@ let add_push = schedule.scheduleJob('0 * * * * *', async () => {
 
 let clear_push = schedule.scheduleJob('*/7 * * * * *', async (error, stdout, stderr) => {
 
-	if(childnum>=maxchild){
+	if((clear_push_childnum+join_chat_childnum)>=maxchild){
 
 		return 
 	}
 
-	console.log(childnum,1111)
-
-	childnum++
+	clear_push_childnum++
 
 	const clear_push_cron = child_process.exec('node cron/clear_push.js',{timeout:60000})
 
 	clear_push_cron.on('exit', (code, signal) => {
 
-		childnum--
+		clear_push_childnum--
 
 	})
 })
 
 let join_chat = schedule.scheduleJob('*/20 * * * * *',async (error, stdout, stderr) => {
 
-	if(childnum>=maxchild){
+	if((clear_push_childnum+join_chat_childnum)>=maxchild){
 
 		return 
 	}
 
-	console.log(childnum,2222)
-
-	childnum++
+	join_chat_childnum++
 
 	const join_chat_cron = child_process.exec('node cron/join_chat.js',{timeout:20000})
 
 	join_chat_cron.on('exit', (code, signal) => {
 
-		childnum--
+		join_chat_childnum--
 
 	})
 })
