@@ -14,21 +14,33 @@ const dbname = config.env.dbname
 
 let url = `mongodb://${dbhost}:${dbport}/${dbname}`
 
+let opt = {
+  	useNewUrlParser: true,
+  	useCreateIndex: true,
+  	useFindAndModify:false,
+   	useUnifiedTopology: true
+}
+
 if (username) {
 	
 	url = `mongodb://${username}:${password}@${dbhost}:${dbport}/${dbname}`
+
+	opt = {
+		auth:{
+			authdb:"admin"
+		},
+	  	useNewUrlParser: true,
+	  	useCreateIndex: true,
+	  	useFindAndModify:false,
+	   	useUnifiedTopology: true
+	}
 }
 
 /**
  * 连接
  */
 
-const DB_URL = mongoose.connect(url, {
-  	useNewUrlParser: true,
-  	useCreateIndex: true,
-  	useFindAndModify:false,
-   	useUnifiedTopology: true
-})
+const DB_URL = mongoose.connect(url, opt)
 
 /**
  * 连接成功
