@@ -1,3 +1,4 @@
+const db_chat = require('../model/schema/chat')
 const chats = [
 	"huaxiapinGG888",
 	"bcworking",

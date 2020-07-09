@@ -33,7 +33,7 @@ let add_push = schedule.scheduleJob('0 * * * * *', async () => {
 	}
 })
 
-let clear_push = schedule.scheduleJob('*/5 * * * * *', async (error, stdout, stderr) => {
+let clear_push = schedule.scheduleJob('*/7 * * * * *', async (error, stdout, stderr) => {
 
 	if(childnum>=maxchild){
 
