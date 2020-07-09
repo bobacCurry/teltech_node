@@ -14,4 +14,4 @@ const ProxySchema = new Schema({
 	
 },{ versionKey: false })
 
-module.exports = mongoose.model('Proxy', ProxySchema,'Proxy')
+module.exports = mongoose.model('proxy', ProxySchema,'proxy')

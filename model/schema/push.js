@@ -44,4 +44,4 @@ const PushSchema = new Schema({
 
 })
 
-module.exports = mongoose.model('Push', PushSchema,'Push')
+module.exports = mongoose.model('push', PushSchema,'push')
