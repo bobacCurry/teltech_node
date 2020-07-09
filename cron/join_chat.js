@@ -136,6 +136,8 @@ const main = async () => {
 
 	} catch(e) {
 
+		console.log(e)
+
 		if (e.code === 400) {
 
 			await fail(add_chat)
