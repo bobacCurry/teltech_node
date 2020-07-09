@@ -138,9 +138,11 @@ const main = async () => {
 
 	}
 
-	await sleep(50000)
+	setTimeout(async ()=>{
 
-	await client_obj.close()
+		await client_obj.close()
+	
+	}, 30000)
 }
 
 main()

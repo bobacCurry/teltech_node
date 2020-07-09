@@ -136,8 +136,6 @@ const main = async () => {
 
 	} catch(e) {
 
-		console.log(e)
-
 		if (e.code === 400) {
 
 			await fail(add_chat)
@@ -156,11 +154,9 @@ const main = async () => {
 		}
 
 		log.cron_record(e.message?e.message:e)
-	
-	}finally{
-
-		await client_obj.close()
 	}
+		
+	await client_obj.close()
 }
 
 main()

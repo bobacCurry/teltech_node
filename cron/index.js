@@ -44,7 +44,7 @@ let clear_push = schedule.scheduleJob('*/7 * * * * *', async (error, stdout, std
 
 	clear_push_childnum++
 
-	const clear_push_cron = child_process.exec('node cron/clear_push.js',{timeout:60000})
+	const clear_push_cron = child_process.fork('cron/clear_push.js',{ detached:true })
 
 	clear_push_cron.on('exit', (code, signal) => {
 
@@ -62,7 +62,7 @@ let join_chat = schedule.scheduleJob('*/20 * * * * *',async (error, stdout, stde
 
 	join_chat_childnum++
 
-	const join_chat_cron = child_process.exec('node cron/join_chat.js',{timeout:20000})
+	const join_chat_cron = child_process.fork('cron/join_chat.js',{ detached:true })
 
 	join_chat_cron.on('exit', (code, signal) => {
 
