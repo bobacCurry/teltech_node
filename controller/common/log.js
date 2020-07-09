@@ -37,14 +37,8 @@ module.exports = {
 		)
 	},
 	cron_record: async (error) => {
-	
-		fs.writeFile(cron_file, time + ':' + error + '\n', { flag: 'a' },(err)=>{
-
-				if (err) {
-
-					console.log(err)
-				}
-			}
-		)
+		fs.writeFileSync(cron_file, time + ':' + error + '\n', { flag: 'a' },(e)=>{
+			console.log(e)
+		})
 	}
 }

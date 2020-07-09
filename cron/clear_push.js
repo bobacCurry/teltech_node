@@ -136,14 +136,11 @@ const main = async () => {
 
 		log.cron_record(`${queue.phone}: ${e.msg}`)
 
-	}finally{
-
-		setTimeout(async ()=>{
-
-			await client_obj.close()
-
-		},40000)
 	}
+
+	await sleep(30000)
+
+	await client_obj.close()
 }
 
 main()
