@@ -10,7 +10,7 @@ router.post('/register', jwt.decode, account.register)
 
 router.post('/login', account.login)
 
-router.get('/get_info', jwt.decode, account.get_info)
+router.get('/get_info', account.get_info)
 
 router.post('/reset_password', jwt.decode, account.reset_password)
 
