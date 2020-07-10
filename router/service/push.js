@@ -16,6 +16,6 @@ router.post('/update/:_id', jwt.decode, push.update)
 
 router.post('/change_status/:_id', jwt.decode, push.change_status)
 
-router.post('/del/:_id', jwt.decode, push.del)
+router.post('/del_push/:_id', jwt.decode, push.del)
 
 module.exports = router
