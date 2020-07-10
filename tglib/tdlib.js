@@ -11,7 +11,7 @@ class TDLib extends EventEmitter {
 		super()
 		
 		const defaults = {
-			libraryFile: process.platform === 'win32' && 'tdjson' || 'libtdjson',
+			libraryFile: `lib/${process.platform === 'win32' && 'tdjson' || 'libtdjson'}`,
 			databaseDirectory: '.tlg/'+options.phone, 
 			logFile: 'tlg.log',
 			encryptionKey: '',
