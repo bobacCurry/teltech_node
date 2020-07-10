@@ -31,10 +31,16 @@ module.exports = {
 
 		const _id = req.params._id
 
-		const data = await db_push.findOne({ _id, uid })
+		try{
+			
+			const data = await db_push.findOne({ _id, uid })
 
-		return res.send({ success: true, msg: data })
-	
+			return res.send({ success: true, msg: data })
+		
+		}catch(e){
+
+			return res.send({ success: false, msg: e.message? e.message: e })
+		}
 	},
 	add: async (req, res, next) => {
 
