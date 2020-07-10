@@ -3,38 +3,38 @@ const db_chat = require('../model/schema/chat')
 const axios = require('axios')
 
 const chats = [
-	"waimai888",
-	"feilvbingmeishijia",
-	"wmmsq",
-	"TG188",
-	"chengshitongqun",
-	"Liugezhashuai",
-	"manilafoods",
-	"Dny_WM",
-	"ff55555",
-	"meishi001",
-	"phlfood",
-	"msyhd888",
-	"waimai98ejiaoliu",
-	"bs16888",
-	"niuniuGroup",
-	"MeiShiShuo",
-	"FoodieInPH",
-	"bolems1",
-	"FLBWM",
-	"LLZP995",
-	"foodinph",
-	"BC868",
-	"hanhan997",
-	"YG0014",
-	"tlw04",
-	"TG2501",
-	"wmmspy",
-	"FLL85",
-	"dingleme",
-	"manilawaimai",
-	"feileyuanwaimai",
-	"makatiwaimaiqun"
+	// "waimai888",
+	// "feilvbingmeishijia",
+	// "wmmsq",
+	// "TG188",
+	// "chengshitongqun",
+	// "Liugezhashuai",
+	// "manilafoods",
+	// "Dny_WM",
+	// "ff55555",
+	// "meishi001",
+	// "phlfood",
+	// "msyhd888",
+	// "waimai98ejiaoliu",
+	// "bs16888",
+	// "niuniuGroup",
+	// "MeiShiShuo",
+	// "FoodieInPH",
+	// "bolems1",
+	// "FLBWM",
+	// "LLZP995",
+	// "foodinph",
+	// "BC868",
+	// "hanhan997",
+	// "YG0014",
+	// "tlw04",
+	// "TG2501",
+	// "wmmspy",
+	// "FLL85",
+	// "dingleme",
+	// "manilawaimai",
+	// "feileyuanwaimai",
+	// "makatiwaimaiqun"
 ]
 
 const main = async () => {
@@ -63,9 +63,11 @@ const main = async () => {
 
 		}catch(e){
 
-			console.log(e.data)
+			console.log(e)
 		}
 	}
+
+	return 
 }
 
 main()

@@ -114,7 +114,7 @@ const main = async () => {
 
 	if (!add_chat.chatids.length) {
 
-		await add_chat.updateOne({ _id: add_chat._id }, { status: 1 })
+		await db_add_chat.updateOne({ _id: add_chat._id }, { status: 1 })
 
 		process.exit(1)
 	}
