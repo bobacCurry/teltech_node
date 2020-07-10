@@ -20,10 +20,16 @@ module.exports = {
 
 		const uid = req.user._id
 
-		const data = await db_push.find({uid},'title phone status expire minute chat_type text_type').skip(skip).limit(50)
+		try{
+			
+			const data = await db_push.find({uid},'title phone status expire minute chat_type text_type').skip(skip).limit(50)
 
-		return res.send({ success: true, msg: data })
-	
+			return res.send({ success: true, msg: data })
+			
+		}catch(e){
+
+			return next(new Error(err))
+		}
 	},
 	get_one: async (req, res, next) => {
 	
@@ -39,7 +45,7 @@ module.exports = {
 		
 		}catch(e){
 
-			return res.send({ success: false, msg: e.message? e.message: e })
+			return next(new Error(err))
 		}
 	},
 	add: async (req, res, next) => {
