@@ -25,7 +25,7 @@ module.exports = {
 			const data = await db_push.find({uid},'title phone status expire minute chat_type text_type').skip(skip).limit(50)
 
 			return res.send({ success: true, msg: data })
-			
+
 		}catch(e){
 
 			return next(new Error(err))
@@ -114,7 +114,7 @@ module.exports = {
 
 			try{
 
-				await push_obj.create({ uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, message_id, from_chat_id })
+				await push_obj.create({ uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, message_id, from_chat_id, count })
 
 				await client_obj.updateOne({ phone },{ used: 1 })
 
