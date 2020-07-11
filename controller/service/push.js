@@ -105,6 +105,11 @@ module.exports = {
 
 			if (!m.success||!m.msg) {
 
+				if (m.msg==='PHONE_UNBINDED') {
+
+					await client_obj.updateOne({ phone },{ status: 3 })
+				}
+
 				return res.send(m)
 			}
 
@@ -195,6 +200,13 @@ module.exports = {
 		n.on('message', async (m) => {
 
 			if (!m.success||!m.msg) {
+
+				if (m.msg==='PHONE_UNBINDED') {
+
+					await client_obj.updateOne({ phone },{ status: 3 })
+				
+					await push_obj.updateOne({ phone }, { status: 0 })
+				}
 
 				return res.send(m)
 			}

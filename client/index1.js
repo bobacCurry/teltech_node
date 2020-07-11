@@ -8,17 +8,18 @@ main()
 
 async function main() {
 
-	const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone:'8613601974603' })
+	const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone:'639665493530' })
 
 	try {
 	
 		await client_obj.connect('user')
 
-		const ret = await client_obj.setOption('ignore_background_updates',true)
+		const ret = await client_obj.setOption('ignore_background_updates',false)
+
+		console.log(ret)
 
 		await client_obj.close()
 		
-	
 	} catch(e) {
 	
 		console.log('ERROR', e)
