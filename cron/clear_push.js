@@ -145,6 +145,8 @@ const main = async () => {
 	setTimeout(async ()=>{
 
 		await client_obj.close()
+
+		process.exit(1)
 	
 	}, 30000)
 }

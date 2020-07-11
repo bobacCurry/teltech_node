@@ -155,6 +155,8 @@ const main = async () => {
 	}
 		
 	await client_obj.close()
+
+	process.exit(1)
 }
 
 main()
