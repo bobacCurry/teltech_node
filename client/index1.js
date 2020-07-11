@@ -14,36 +14,12 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		let count = 0
+		const ret = await client_obj.getOption('ignore_background_updates')
 
-		await client_obj.forwardMessages(-1001270300084,1365358673,[3145728])
+		console.log(ret)
 
-		while(true) {
-
-			const ret = await client_obj.getChat(-1001159822763)
-
-			console.log(ret)
-
-			if (ret.last_message&&!ret.last_message.sending_state) {
-
-				break
-			}
-
-			count++
-
-			if (count>=10) {
-
-				throw { success: false, msg: '网络延迟严重' }
-			}
-
-			await sleep(200)
-		}
-
-		setTimeout(async ()=>{
-
-			await client_obj.close()
+		await client_obj.close()
 		
-		},1000)
 	
 	} catch(e) {
 	

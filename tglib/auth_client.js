@@ -11,6 +11,13 @@ class Client extends TDLib {
 		return this.request('getMe')
 	}
 
+    async ignore_background_updates(value){
+        return this.request('setOption',{
+            name:'ignore_background_updates',
+            value: { '@type':'optionValueBoolean', value }
+        })
+    }
+
     /**
      * @param {string} text 
      * @param {string} type text|markdown|html 

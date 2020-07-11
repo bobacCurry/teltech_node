@@ -19,6 +19,13 @@ class Client extends TDLib {
 		})
 	}
 
+	// async setOption(name,value){
+	// 	return this.request('setOption',{
+	// 		name,
+	// 		value: { '@type':'optionValueBoolean', value }
+	// 	})
+	// }
+
 	async getMe() {
 		return this.request('getMe')
 	}

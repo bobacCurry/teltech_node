@@ -16,6 +16,8 @@ const bind = async (client_obj,phone) => {
 
 		const user = await client_obj.getMe()
 
+		const ret = await client_obj.ignore_background_updates(true)
+
 		process.send({ success:true, msg:user })
 
 	}catch(e){
