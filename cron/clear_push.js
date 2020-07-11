@@ -71,6 +71,10 @@ const send = async (client_obj, queue) => {
 
 				throw e
 
+			}else if((e.msg&&e.msg.indexOf('Too Many Requests'))||(e.message&&e.message.indexOf('Too Many Requests'))){
+
+				throw e
+
 			}else{
 
 				fail.push(queue.chat[i].chatid)
@@ -134,7 +138,7 @@ const main = async () => {
 			await spamed(queue.phone)
 		}
 
-		log.cron_record(`${queue.phone}: ${e.msg}`)
+		log.cron_record(`clear_push: ${queue.phone}: ${e.msg?e.msg:e.message}`)
 
 	}
 

@@ -151,7 +151,7 @@ const main = async () => {
 			await fail(add_chat)
 		}
 
-		log.cron_record(e.message?e.message:e)
+		log.cron_record(`join_chat: ${add_chat.phone}${e.message?e.message:e}`)
 	}
 		
 	await client_obj.close()
