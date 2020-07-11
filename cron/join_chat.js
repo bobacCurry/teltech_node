@@ -18,8 +18,6 @@ const success = async (add_chat) => {
 
 	const success = [...add_chat.success,chat]
 
-	const exec = new Date().getTime() + 60*2.5*1000
-
 	let status = 0
 
 	if (!chatids.length) {
@@ -29,7 +27,7 @@ const success = async (add_chat) => {
 
 	try{
 
-		await db_add_chat.updateOne({ _id: add_chat._id },{ chatids, success, exec, status })
+		await db_add_chat.updateOne({ _id: add_chat._id },{ chatids, success, status })
 	
 	}catch(e){
 
@@ -47,8 +45,6 @@ const fail = async (add_chat) => {
 
 	const fail = [...add_chat.fail,chat]
 
-	const exec = new Date().getTime() + 60*2.5*1000
-
 	let status = 0
 
 	if (!chatids.length) {
@@ -58,7 +54,7 @@ const fail = async (add_chat) => {
 
 	try{
 
-		await db_add_chat.updateOne({ _id: add_chat._id },{ chatids, fail, exec, status })
+		await db_add_chat.updateOne({ _id: add_chat._id },{ chatids, fail, status })
 	
 	}catch(e){
 
@@ -86,7 +82,7 @@ const unbind = async (add_chat) => {
 
 const wait = async (add_chat) =>{
 
-	const exec = new Date().getTime() + 60*2.5*1000
+	const exec = new Date().getTime() + 60*2*1000
 
 	try{
 
@@ -105,7 +101,7 @@ const main = async () => {
 	// 下次加群的时间
 	const exec = new Date().getTime()
 
-	const add_chat = await db_add_chat.findOne({ status:0, exec:{ $lt: exec } },'uid phone chatids success fail')
+	const add_chat = await db_add_chat.findOne({ status:0, exec:{ $lt: exec } },'uid phone chatids success fail').sort({'exec':1})
 
 	if (!add_chat) {
 
@@ -118,6 +114,8 @@ const main = async () => {
 
 		process.exit(1)
 	}
+
+	await wait(add_chat)
 
 	const client_obj = new client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone: add_chat.phone })
 

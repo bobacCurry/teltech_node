@@ -147,7 +147,7 @@ class TDLib extends EventEmitter {
                     api_hash: this.options.apiHash,
                     database_directory: path.resolve(this.options.databaseDirectory),
                     use_message_database: false,
-                    use_secret_chats: true,
+                    use_secret_chats: false,
                     system_language_code: 'en',
                     device_model: 'Desktop', //Samsung X
                     system_version: 'Unknown', //Windows 10, Debian 9
