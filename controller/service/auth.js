@@ -23,7 +23,7 @@ module.exports = {
 			res.send({ success:false, msg:'请输入手机号'})
 		}
 
-		const n = cp.fork('client/auth.js',{ detached:true })
+		const n = cp.fork('client/auth.js')
 
 		n.send({ phone, action: 'bind' })
 

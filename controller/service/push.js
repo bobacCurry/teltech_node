@@ -97,7 +97,7 @@ module.exports = {
 
 		const content = text_type?`${caption}\n${media}`:text
 
-		const n = cp.fork('client/index.js',{ detached:true })
+		const n = cp.fork('client/index.js')
 
 		n.send({ phone, action: 'push', data: content })
 
@@ -188,7 +188,7 @@ module.exports = {
 
 		const content = text_type?`${caption}\n${media}`:text
 
-		const n = cp.fork('client/index.js',{ detached:true })
+		const n = cp.fork('client/index.js')
 
 		n.send({ phone, action: 'push', data: content })
 
