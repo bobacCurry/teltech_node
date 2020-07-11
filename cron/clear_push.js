@@ -53,7 +53,7 @@ const send = async (client_obj, queue) => {
 						throw { code: 502, msg: '网络延迟严重' }
 					}
 
-					await sleep(200)
+					await sleep(1000)
 				}
 			}
 

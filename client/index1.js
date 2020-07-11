@@ -16,8 +16,6 @@ async function main() {
 
 		const ret = await client_obj.setOption('ignore_background_updates',true)
 
-		console.log(ret)
-
 		await client_obj.close()
 		
 	
