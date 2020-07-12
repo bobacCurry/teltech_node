@@ -36,6 +36,11 @@ class TDLib extends EventEmitter {
 		this.fetching = new Map()
 	} 
 
+	async disconnect() {
+
+		await this.destroy()
+	}
+
 	async close() {
 
 		await this.destroy()
@@ -162,7 +167,7 @@ class TDLib extends EventEmitter {
                 if (this.loginType === 'bot') {
                     return this.send({'@type': 'checkAuthenticationBotToken', 'token': this.loginValue})
                 }
-                return this.rejector({ code:401, message:'PHONE_UNBINDED' })
+                return this.rejector({ code:401, message:'飞机号断开连接，请重新绑定' })
                 // return this.send({'@type': 'setAuthenticationPhoneNumber', 'phone_number': this.loginValue})
 			// case 'authorizationStateWaitCode':
 			// 	return this.authorizationCode()

@@ -151,11 +151,11 @@ module.exports = {
 			return res.send({ success: false, msg: '服务不存在' })
 		}
 
-		const client = await client_obj.findOne({ phone, uid , status:1 })
+		const client = await client_obj.findOne({ phone, uid , status:{ $in:[ 1, 2 ] } })
 
 		if (!client||(client.used&&(push.phone!=phone))) {
 
-			return res.send({ success: false, msg: '飞机非法或已被占用' })
+			return res.send({ success: false, msg: '飞机被占用或者已被封禁' })
 		}
 
 		title = title? title: ''

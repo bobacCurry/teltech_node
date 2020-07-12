@@ -18,10 +18,13 @@ const bind = async (client_obj,phone) => {
 
 		process.send({ success:true, msg:user })
 
+		await client_obj.close()
+
 	}catch(e){
 
 		process.send({ success:false, msg:e.message })
 		
+		await client_obj.close()
 	}
 }
 
@@ -58,6 +61,7 @@ async function main() {
 	  			process.send({ success:false,msg:'NO_MATCHED_ACTION' })
 	  	}
 
-	  	await client_obj.close()
+
+	  	process.exit(1)
 	})
 }

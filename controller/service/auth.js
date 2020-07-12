@@ -14,14 +14,30 @@ module.exports = {
 
 	send_code : async (req, res, next) => {
 
-		const phone = req.params.phone
+		let phone = req.params.phone
 
 		const uid = req.user._id
 
+		phone = phone.replace(/\s*\n*\+*/g,'')
+
 		if (!phone) {
 
-			res.send({ success:false, msg:'请输入手机号'})
+			return res.send({ success:false, msg:'请输入手机号'})
 		}
+
+		const exist = await db_client.findOne({"phone":phone})
+
+		if (exist) {
+
+			return res.send({ success:false, msg:'手机号已经被绑定'})
+		}
+
+		if(await cache.get(`checking_${phone}`)){
+
+			return res.send({ success:false, msg:'验证中，请勿重复发送'})
+		}
+
+		await cache.set(`checking_${phone}`,1)
 
 		const n = cp.fork('client/auth.js',{ detached:true })
 
@@ -36,12 +52,9 @@ module.exports = {
 
 		  	const info = { first_name: m.msg.first_name,username: m.msg.username,id: m.msg.id }
 
-		  	const exist = await db_client.findOne({"phone":phone})
+		  	await db_client.create({ phone, uid, status:1, info:info })
 
-		  	if (!exist) {
-
-		  		await db_client.create({ phone, uid, status:1, info:info })
-		  	}
+		  	await cache.del(`checking_${phone}`)
 
 		  	return res.send(m)
 		})

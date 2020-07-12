@@ -138,7 +138,7 @@ const main = async () => {
 
 			await fail(add_chat)
 
-		}else if (e.code === 401) {
+		}else if (e.code === 401 || e.message.indexOf('because it is already in use')!==-1) {
 
 			await unbind(add_chat)
 		
