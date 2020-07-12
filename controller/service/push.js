@@ -95,11 +95,9 @@ module.exports = {
 			return res.send({ success: false, msg: '飞机非法或已被占用' })
 		}
 
-		const content = text_type?`${caption}\n${media}`:text
-
 		const n = cp.fork('client/index.js',{ detached:true })
 
-		n.send({ phone, action: 'push', data: content })
+		n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
 
 		n.on('message', async (m) => {
 
@@ -191,11 +189,9 @@ module.exports = {
 			return res.send({ success: false, msg: '文案不得为空' })
 		}
 
-		const content = text_type?`${caption}\n${media}`:text
-
 		const n = cp.fork('client/index.js',{ detached:true })
 
-		n.send({ phone, action: 'push', data: content })
+		n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
 
 		n.on('message', async (m) => {
 

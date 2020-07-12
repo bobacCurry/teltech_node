@@ -34,7 +34,16 @@ const push = async (client_obj,data) => {
 
 		const user = await client_obj.createPrivateChat(chat.id)
 
-		await client_obj.sendMessage(chat.id, data)
+		if (data.text_type) {
+
+			const photo = __dirname+'/..'+data.media
+
+			await client_obj.sendMedia(chat.id, photo, data.caption)
+		
+		}else{
+
+			await client_obj.sendMessage(chat.id, data.text)
+		}
 
 		let count = 0
 
@@ -72,7 +81,7 @@ const push = async (client_obj,data) => {
 
 async function main() {
 
-	process.on('message', async ({ phone, action = null, data = null }) => {
+	process.on('message', async ({ phone, action = null, data = {} }) => {
 
 		if (!phone) {
 

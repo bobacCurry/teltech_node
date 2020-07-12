@@ -152,8 +152,14 @@ class Client extends TDLib {
 			from_background: true, 
             input_message_content: {
 				'@type': 'inputMessagePhoto', 
-				photo, 
-				caption
+				photo: {
+					'@type': 'inputFileLocal', 
+					path: photo
+				}, 
+				caption:{
+					'@type': 'formattedText', 
+					text: caption
+				}
 			}
         })
     }
