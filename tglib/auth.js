@@ -123,7 +123,7 @@ class TDLib extends EventEmitter {
 
 			if (wait>=120) {
 
-				throw { success:false, message:'验证码过期，请重新发送' }
+				return this.rejector({ success:false, message:'验证码过期，请重新发送' })
 
 				break
 			}

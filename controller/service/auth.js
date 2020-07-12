@@ -45,6 +45,8 @@ module.exports = {
 
 		n.on('message', async (m) => {
 		  	
+			await cache.del(`checking_${phone}`)
+
 		  	if (!m.success) {
 
 		  		return res.send(m)
@@ -54,8 +56,6 @@ module.exports = {
 
 		  	await db_client.create({ phone, uid, status:1, info:info })
 
-		  	await cache.del(`checking_${phone}`)
-
 		  	return res.send(m)
 		})
 
@@ -63,9 +63,11 @@ module.exports = {
 	},
 	confirm_code : async (req, res, next) => {
 
-		const phone = req.params.phone
+		let phone = req.params.phone
 
 		const code = req.params.code
+
+		phone = phone.replace(/\s*\n*\+*/g,'')
 
 		if (!phone || !code) {
 

@@ -16,15 +16,16 @@ const bind = async (client_obj,phone) => {
 
 		const user = await client_obj.getMe()
 
-		process.send({ success:true, msg:user })
+		await cache.del(`check_${phone}`)
 
-		await client_obj.close()
+		process.send({ success:true, msg:user })
 
 	}catch(e){
 
+		console.log(e)
+
 		process.send({ success:false, msg:e.message })
 		
-		await client_obj.close()
 	}
 }
 
@@ -36,14 +37,14 @@ async function main() {
 
 			process.send({ success:false,msg:'NO_MATCHED_PHONE' })
 
-			return 
+			process.exit(1)
 		}
 
 		if (!action) {
 
-			process.send({ success:false,msg:'NO_MATCHED_PHONE' })
+			process.send({ success:false,msg:'NO_MATCHED_ACTION' })
 
-			return 
+			process.exit(1)
 		}
 
 		const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone })
@@ -61,6 +62,7 @@ async function main() {
 	  			process.send({ success:false,msg:'NO_MATCHED_ACTION' })
 	  	}
 
+	  	await client_obj.close()
 
 	  	process.exit(1)
 	})
