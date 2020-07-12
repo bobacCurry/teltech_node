@@ -22,8 +22,6 @@ const bind = async (client_obj,phone) => {
 
 	}catch(e){
 
-		console.log(e)
-
 		process.send({ success:false, msg:e.message })
 		
 	}
