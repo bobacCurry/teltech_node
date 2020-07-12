@@ -19,7 +19,7 @@ module.exports = {
 
 		try{
 
-			const client = await client_obj.findOne({ uid, phone, status: 1 })
+			const client = await client_obj.findOne({ uid, phone, status: { $in:[ 1, 2 ] } })
 
 			if (!client) {
 
