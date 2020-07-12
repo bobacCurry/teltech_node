@@ -20,8 +20,6 @@ const send = async (client_obj, queue) => {
 
 	for (var i = queue.chat.length - 1; i >= 0; i--) {
 
-		console.log(queue.chat[i].chatname)
-
 		try{
 
 			await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
@@ -60,8 +58,6 @@ const send = async (client_obj, queue) => {
 			}
 
 		}catch(e){
-
-			console.log(e,queue.chat[i].chatname)
 
 			if (e.code===5) {
 
