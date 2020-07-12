@@ -20,6 +20,8 @@ const send = async (client_obj, queue) => {
 
 	for (var i = queue.chat.length - 1; i >= 0; i--) {
 
+		console.log(queue.chat[i].chatname)
+
 		try{
 
 			await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
@@ -59,6 +61,8 @@ const send = async (client_obj, queue) => {
 
 		}catch(e){
 
+			console.log(e,queue.chat[i].chatname)
+
 			if (e.code===5) {
 
 				await client_obj.searchPublicChat(queue.chat[i].chatname)
@@ -71,7 +75,7 @@ const send = async (client_obj, queue) => {
 
 				throw e
 
-			}else if((e.msg&&e.msg.indexOf('Too Many Requests'))||(e.message&&e.message.indexOf('Too Many Requests'))){
+			}else if(e.message.indexOf('Too Many Requests')!==-1){
 
 				throw e
 
@@ -146,7 +150,7 @@ const main = async () => {
 
 		await client_obj.close()
 	
-	}, 60000)
+	}, 20000)
 }
 
 main()
