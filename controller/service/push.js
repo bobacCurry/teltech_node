@@ -8,6 +8,8 @@ const client_obj = require('../../model/schema/client')
 
 const add_chat_obj = require('../../model/schema/add_chat')
 
+const cache = require('../../cache')
+
 module.exports = {
 
 	get: async (req, res, next) => {
@@ -95,11 +97,20 @@ module.exports = {
 			return res.send({ success: false, msg: '飞机非法或已被占用' })
 		}
 
+		if(await cache.get(`pushing_${phone}`)){
+
+			return res.send({ success:false, msg:'保存中，请勿重复发送'})
+		}
+
+		await cache.set(`pushing_${phone}`,1)
+
 		const n = cp.fork('client/index.js',{ detached:true })
 
 		n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
 
 		n.on('message', async (m) => {
+
+			await cache.del(`pushing_${phone}`)
 
 			if (!m.success||!m.msg) {
 
@@ -189,11 +200,20 @@ module.exports = {
 			return res.send({ success: false, msg: '文案不得为空' })
 		}
 
+		if(await cache.get(`pushing_${phone}`)){
+
+			return res.send({ success:false, msg:'保存中，请勿重复发送'})
+		}
+
+		await cache.set(`pushing_${phone}`,1)
+
 		const n = cp.fork('client/index.js',{ detached:true })
 
 		n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
 
 		n.on('message', async (m) => {
+
+			await cache.del(`pushing_${phone}`)
 
 			if (!m.success||!m.msg) {
 

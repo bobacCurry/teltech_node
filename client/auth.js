@@ -4,6 +4,10 @@ const cache = require('../cache')
 
 const config = require('../config')
 
+var fs = require('fs')
+
+const del_dir = require('../controller/common/delDir')
+
 main()
 
 const bind = async (client_obj,phone) => {
@@ -21,6 +25,13 @@ const bind = async (client_obj,phone) => {
 		process.send({ success:true, msg:user })
 
 	}catch(e){
+
+		const path = __dirname + '/../.tlg/' + phone
+
+		if(fs.existsSync(path)) {
+
+			del_dir(path)
+		}
 
 		process.send({ success:false, msg:e.message })
 		

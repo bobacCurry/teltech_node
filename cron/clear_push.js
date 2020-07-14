@@ -48,7 +48,7 @@ const send = async (client_obj, queue) => {
 
 					count++
 
-					if (count>=20) {
+					if (count>=40) {
 
 						throw { code: 502, msg: '网络延迟严重' }
 					}

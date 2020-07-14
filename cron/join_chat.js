@@ -20,12 +20,14 @@ const success = async (add_chat) => {
 
 	let status = 0
 
-	if (!chatids.length) {
-
-		status = 1
-	}
-
 	try{
+
+		if (!chatids.length) {
+
+			status = 1
+
+			await db_client.updateOne({ phone: add_chat.phone },{ status })
+		}
 
 		await db_add_chat.updateOne({ _id: add_chat._id },{ chatids, success, status })
 	
@@ -47,12 +49,14 @@ const fail = async (add_chat) => {
 
 	let status = 0
 
-	if (!chatids.length) {
-
-		status = 1
-	}
-
 	try{
+
+		if (!chatids.length) {
+
+			status = 1
+
+			await db_client.updateOne({ phone: add_chat.phone },{ status })
+		}
 
 		await db_add_chat.updateOne({ _id: add_chat._id },{ chatids, fail, status })
 	
@@ -111,6 +115,8 @@ const main = async () => {
 	if (!add_chat.chatids.length) {
 
 		await db_add_chat.updateOne({ _id: add_chat._id }, { status: 1 })
+
+		await db_client.updateOne({ phone: add_chat.phone },{ status: 1 })
 
 		process.exit(1)
 	}

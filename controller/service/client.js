@@ -14,6 +14,23 @@ var fs = require('fs')
 
 module.exports = {
 
+	add_finish: async (req, res, next)=> {
+
+		const user = req.user
+
+		const phone = req.params.phone
+
+		try{
+			
+			await db_client.updateOne({ uid: user._id, phone },{ status:1 })
+
+			return res.send({ success: true, msg: '更新成功' })
+		
+		}catch(err){
+
+			return next(new Error(err))
+		}
+	},
 	get_user_client: async (req, res, next)=>{
 
 		const user = req.user

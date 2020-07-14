@@ -29,6 +29,8 @@ const PushSchema = new Schema({
 	minute:{ type: Array, default:[] },
 
 	count:{ type: Number, default:0 },
+	//是否使用代发
+	proxy:{ type: Number, default:0 },
 
 	status:{ type: Number, default:0 },
 

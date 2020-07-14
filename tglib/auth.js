@@ -149,7 +149,9 @@ class TDLib extends EventEmitter {
     }
 
 	async handleAuth(update) {
+
         const authorizationState = update.authorization_state['@type']
+		
 		switch (authorizationState) {
 			case 'authorizationStateWaitTdlibParameters':
                 const parameters = {
@@ -174,8 +176,9 @@ class TDLib extends EventEmitter {
                 return this.send({'@type': 'setAuthenticationPhoneNumber', 'phone_number': this.loginValue})
 			case 'authorizationStateWaitCode':
 				return this.authorizationCode()
-			// case 'authorizationStateWaitPassword':
-			// 	return this.authorizationPassword()
+			case 'authorizationStateWaitPassword':
+				return this.rejector({ success:false, message:'请先关闭二次验证（Two-Step Verification）' })
+				// return this.authorizationPassword()
 			case 'authorizationStateReady':
 				return this.resolver()
 			case 'authorizationStateLoggingOut':
