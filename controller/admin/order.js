@@ -2,6 +2,8 @@ const db_order = require('../../model/schema/order')
 
 const db_push = require('../../model/schema/push')
 
+const db_add_chat = require('../../model/schema/add_chat')
+
 module.exports = {
 	
 	get_order : async (req, res, next) => {
@@ -43,6 +45,13 @@ module.exports = {
 			if (!push) {
 
 				return res.send({ success: false, msg: '订单服务不存在' })
+			}
+
+			const adding_chat = await db_add_chat.findOne({ phone: push.phone, status: 0 })
+
+			if (adding_chat) {
+
+				return res.send({ success: false, msg: '飞机号正在加群，暂时不能开启订单' }) 
 			}
 
 			let expire

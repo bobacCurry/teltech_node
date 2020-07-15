@@ -54,7 +54,7 @@ module.exports = {
 
 		  	const info = { first_name: m.msg.first_name,username: m.msg.username,id: m.msg.id }
 
-		  	await db_client.create({ phone, uid, status:1, info:info })
+		  	await db_client.create({ phone, uid, info:info })
 
 		  	return res.send(m)
 		})
