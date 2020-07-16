@@ -160,7 +160,7 @@ module.exports = {
 			return res.send({ success: false, msg: '服务不存在' })
 		}
 
-		const client = await client_obj.findOne({ phone, uid , status:{ $in:[ 1, 2 ] } })
+		const client = await client_obj.findOne({ phone, uid , status:{ $in:[ 0, 1, 2 ] } })
 
 		if (!client||(client.used&&(push.phone!=phone))) {
 
