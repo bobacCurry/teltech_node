@@ -36,6 +36,7 @@ class TDLib extends EventEmitter {
 		this.loginValue = options.phone
 		this.instance = null
 		this.fetching = new Map()
+		this.retry = 0
 	}
 
 	async close() {
@@ -149,9 +150,7 @@ class TDLib extends EventEmitter {
     }
 
 	async handleAuth(update) {
-
         const authorizationState = update.authorization_state['@type']
-		
 		switch (authorizationState) {
 			case 'authorizationStateWaitTdlibParameters':
                 const parameters = {
@@ -187,6 +186,11 @@ class TDLib extends EventEmitter {
 				return
 			case 'authorizationStateClosed':
 				return
+			case 'updateConnectionState':
+				this.retry++
+				if (this.retry>0){
+					return this.rejector({ success:false, message:'绑定出现异常，请换一个飞机号绑定' })
+				}
 		}
 	} 
 
