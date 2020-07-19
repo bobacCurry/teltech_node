@@ -186,11 +186,14 @@ class TDLib extends EventEmitter {
 				return
 			case 'authorizationStateClosed':
 				return
+			case 'authorizationStateWaitRegistration':
+				return this.rejector({ success:false, message:'飞机号还未注册，请先注册后绑定' })
 			case 'updateConnectionState':
 				this.retry++
 				if (this.retry>0){
 					return this.rejector({ success:false, message:'绑定出现异常，请换一个飞机号绑定' })
 				}
+				return
 		}
 	} 
 
