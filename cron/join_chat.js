@@ -86,7 +86,7 @@ const unbind = async (add_chat) => {
 
 const wait = async (add_chat) =>{
 
-	const exec = new Date().getTime() + 60*2500
+	const exec = new Date().getTime() + 60*3000
 
 	try{
 
