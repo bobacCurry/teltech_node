@@ -20,6 +20,8 @@ const bind = async (client_obj,phone) => {
 
 		const user = await client_obj.getMe()
 
+		await client_obj.setOption('use_storage_optimizer',true)
+
 		await cache.del(`check_${phone}`)
 
 		process.send({ success:true, msg:user })

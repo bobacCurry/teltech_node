@@ -12,6 +12,8 @@ const sleep = require('../controller/common/sleep')
 
 const config = require('../config')
 
+const cache = require('../cache')
+
 const send = async (client_obj, queue) => {
 
 	let fail = []
@@ -125,6 +127,16 @@ const main = async () => {
 		if (fail.length) {
 
 			await db_push.updateOne({ phone: queue.phone }, { $pull: { chat: { chatid: {$in: fail } } } })
+		}
+
+		const optimizer= await cache.get(`optimizer_${queue.phone}`)
+
+		if (!optimizer) {
+
+			await cache.set(`optimizer_${queue.phone}`,1)
+
+			await client_obj.setOption('use_storage_optimizer',true)
+
 		}
 
 	}catch(e){
