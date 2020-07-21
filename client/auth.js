@@ -22,6 +22,8 @@ const bind = async (client_obj,phone) => {
 
 		await client_obj.setOption('use_storage_optimizer',true)
 
+		await client_obj.setOption('ignore_background_updates',true)
+
 		await cache.del(`check_${phone}`)
 
 		process.send({ success:true, msg:user })
