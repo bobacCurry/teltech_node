@@ -178,6 +178,22 @@ class Client extends TDLib {
 		})
 	}
 
+	async getStorageStatistics(chat_limit = 0) {
+		return this.request('getStorageStatistics', {
+			chat_limit
+		})
+	}
+
+	async optimizeStorage() {
+		return this.request('optimizeStorage', {
+			size:-1,
+			ttl:-1,
+			count:-1,
+			immunity_delay:-1,
+			chat_limit:0
+		})
+	}
+
     /**
      * @param {string} text 
      * @param {string} type text|markdown|html 

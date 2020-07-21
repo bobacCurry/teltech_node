@@ -8,13 +8,13 @@ main()
 
 async function main() {
 
-	const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone:'8613601974603' })
+	const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone:'601133751860' })
 
 	try {
 	
 		await client_obj.connect('user')
 
-		const ret = await client_obj.setOption('use_storage_optimizer',true)
+		const ret = await client_obj.optimizeStorage()
 
 		console.log(ret)
 
