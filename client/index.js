@@ -48,8 +48,6 @@ const push = async (client_obj,data) => {
 
 		await openChat(client_obj,chat.id)
 
-		await client_obj.createPrivateChat(chat.id)
-
 		let send_ret = ''
 
 		if (data.text_type) {
