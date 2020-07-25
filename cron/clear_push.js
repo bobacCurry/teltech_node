@@ -116,6 +116,13 @@ const main = async () => {
 
 	await db_queue.deleteOne({ phone: queue.phone })
 
+	if (!queue.chat.length){
+
+		await db_push.updateOne({ phone: queue.phone },{ status: 0 })
+
+		process.exit(1)
+	}
+
 	const client_obj = new client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone: queue.phone })
 
 	try {

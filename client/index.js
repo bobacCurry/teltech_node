@@ -42,7 +42,7 @@ const push = async (client_obj,data) => {
 		
 		}else{
 
-			await client_obj.sendMessage(chat.id, data.text)
+			await client_obj.sendMessage(chat.id, data.text, 'html')
 		}
 
 		let count = 0
