@@ -69,16 +69,13 @@ const push = async (client_obj,data) => {
 
 			const ret = await client_obj.getChat(chat.id)
 
-			if (send_ret.sender_user_id === ret.last_message.sender_user_id) {
+			if (!ret.last_message.sending_state) {
 
-				if (!ret.last_message.sending_state) {
+				last_message = ret.last_message
 
-					last_message = ret.last_message
-
-					break
-				}
+				break
 			}
-
+			
 			count++
 
 			if (count>=50) {
