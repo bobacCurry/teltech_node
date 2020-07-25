@@ -14,18 +14,20 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		const ret = await client_obj.forwardMessages(-1001159822763,601424972,[131607822336])
+		const ret0 = await client_obj.sendMessage(-1001159822763,'11111')
 
-		console.log(ret)
+		console.log(ret0)
 
-		await client_obj.close()
+		let count = 0
 
-		// setTimeout(async () => {
-		
-		// 	await client_obj.close()
-			
-		// },1000)
-		
+		while(true) {
+
+			const ret1 = await client_obj.getChat(-1001159822763)
+
+			console.log(ret1)
+
+		}
+
 	} catch(e) {
 	
 		console.log('ERROR', e)
