@@ -24,7 +24,7 @@ const send = async (client_obj, queue) => {
 
 		try{
 
-			await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
+			const send_ret = await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
 
 			if (spam) {
 
@@ -34,28 +34,37 @@ const send = async (client_obj, queue) => {
 
 					const ret = await client_obj.getChat(queue.chat[i].chatid)
 
-					if (ret.last_message&&ret.last_message.sending_state&&ret.last_message.sending_state.error_message==='USER_BANNED_IN_CHANNEL') {
+					if (ret.last_message.sender_user_id===send_ret.messages[0].sender_user_id) {
 
-						throw {code: 400, msg: 'USER_BANNED_IN_CHANNEL'}
+						if (ret.last_message&&ret.last_message.sending_state&&ret.last_message.sending_state.error_message==='USER_BANNED_IN_CHANNEL') {
 
-						break
-					}
+							throw {code: 400, msg: 'USER_BANNED_IN_CHANNEL'}
 
-					if (ret.last_message&&!ret.last_message.sending_state) {
+							break
+						}
 
+						if (ret.last_message&&!ret.last_message.sending_state) {
+
+							spam = 0
+
+							break
+						}
+
+						count++
+
+					}else{
+						
 						spam = 0
 
 						break
 					}
 
-					count++
-
-					if (count>=40) {
+					if (count>=30) {
 
 						throw { code: 502, msg: '网络延迟严重' }
 					}
 
-					await sleep(500)
+					await sleep(100)
 				}
 			}
 

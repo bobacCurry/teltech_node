@@ -14,16 +14,42 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		const ret = await client_obj.optimizeStorage()
+		const ret = await client_obj.sendMessage(-1001159822763,'11111')
 
-		console.log(ret)
+		let count = 0
 
-		setTimeout(async () => {
-		
-			await client_obj.close()
+		while(true) {
+
+			if (count>=10) {
 			
-		},1000)
+				throw { code: 502, msg: '网络延迟严重' }
+			
+			}
 
+			const ret1 = await client_obj.getChat(-1001159822763)
+
+			if (ret1.last_message.sender_user_id===ret.sender_user_id){
+
+				console.log(ret1,3333333333)
+
+			}else{
+
+				console.log(ret1,4444444444)
+			}
+
+			count++
+
+			await sleep(200)
+
+		}
+
+		await client_obj.close()
+
+		// setTimeout(async () => {
+		
+		// 	await client_obj.close()
+			
+		// },1000)
 		
 	} catch(e) {
 	

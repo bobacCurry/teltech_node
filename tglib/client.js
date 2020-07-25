@@ -121,6 +121,15 @@ class Client extends TDLib {
 		})
 	}
 
+	async searchChatMessages(chat_id, sender_user_id, from_message_id, limit) {
+		return this.request('searchChatMessages', {
+			chat_id, 
+			sender_user_id,
+			from_message_id,
+			limit
+		})
+	}
+
 	async forwardMessages(chat_id, from_chat_id, message_ids = []) {
 		return this.request('forwardMessages', {
 			chat_id,

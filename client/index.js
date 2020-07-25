@@ -34,15 +34,17 @@ const push = async (client_obj,data) => {
 
 		const user = await client_obj.createPrivateChat(chat.id)
 
+		let send_ret = ''
+
 		if (data.text_type) {
 
 			const photo = __dirname+'/..'+data.media
 
-			await client_obj.sendMedia(chat.id, photo, data.caption)
+			send_ret = await client_obj.sendMedia(chat.id, photo, data.caption)
 		
 		}else{
 
-			await client_obj.sendMessage(chat.id, data.text, 'html')
+			send_ret = await client_obj.sendMessage(chat.id, data.text, 'html')
 		}
 
 		let count = 0
@@ -53,11 +55,14 @@ const push = async (client_obj,data) => {
 
 			const ret = await client_obj.getChat(chat.id)
 
-			if (ret.last_message&&!ret.last_message.sending_state) {
+			if (send_ret.sender_user_id === ret.last_message.sender_user_id) {
 
-				last_message = ret.last_message
+				if (!ret.last_message.sending_state) {
 
-				break
+					last_message = ret.last_message
+
+					break
+				}
 			}
 
 			count++
@@ -67,7 +72,7 @@ const push = async (client_obj,data) => {
 				throw { success: false, msg: '网络延迟严重' }
 			}
 
-			await sleep(300)
+			await sleep(100)
 		}
 
 		process.send({ success: true, msg: last_message })
