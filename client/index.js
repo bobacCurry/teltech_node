@@ -24,6 +24,20 @@ const getMe = async (client_obj) => {
 	}
 }
 
+const openChat = async (client_obj,chat_id) => {
+
+	try{
+
+		await client_obj.openChat(chat_id)
+
+	}catch(e){
+
+		await client_obj.createPrivateChat(chat_id)
+	}
+
+	return
+}
+
 const push = async (client_obj,data) => {
 
 	try{
@@ -32,7 +46,9 @@ const push = async (client_obj,data) => {
 
 		const chat = await client_obj.getMe()
 
-		const user = await client_obj.createPrivateChat(chat.id)
+		await openChat(client_obj,chat.id)
+
+		await client_obj.createPrivateChat(chat.id)
 
 		let send_ret = ''
 

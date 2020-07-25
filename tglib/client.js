@@ -105,7 +105,7 @@ class Client extends TDLib {
 		return this.request('createPrivateChat', {
 			user_id: id
 		})
-	} 
+	}
 
 	async getMessage(chat_id, message_id) {
 		return this.request('getMessage', {
