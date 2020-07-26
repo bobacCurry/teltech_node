@@ -18,9 +18,13 @@ const getMe = async (client_obj) => {
 		
 		process.send({ success:true, msg:user})
 
+		await client_obj.close()
+
 	}catch(e){
 
 		process.send({ success:false, msg:e.message })
+
+		await client_obj.close()
 	}
 }
 
@@ -54,43 +58,35 @@ const push = async (client_obj,data) => {
 
 			const photo = __dirname+'/..'+data.media
 
-			send_ret = await client_obj.sendMedia(chat.id, photo, data.caption)
+			await client_obj.sendMedia(chat.id, photo, data.caption)
 		
 		}else{
 
-			send_ret = await client_obj.sendMessage(chat.id, data.text, 'html')
+			await client_obj.sendMessage(chat.id, data.text, 'html')
 		}
 
-		let count = 0
+		let message = null
 
-		let last_message = null
 
-		while(true) {
+		client_obj.on('updateMessageSendSucceeded',async (res)=>{
 
-			const ret = await client_obj.getChat(chat.id)
+			process.send({ success: true, msg: res.message })
 
-			if (!ret.last_message.sending_state) {
+			await client_obj.close()
+		})
 
-				last_message = ret.last_message
-
-				break
-			}
+		client_obj.on('updateMessageSendFailed',async (res)=>{
 			
-			count++
+			process.send({ success: false, msg: res.error_message })
 
-			if (count>=20) {
-
-				throw { success: false, msg: '网络延迟严重' }
-			}
-
-			await sleep(300)
-		}
-
-		process.send({ success: true, msg: last_message })
+			await client_obj.close()
+		})		
 
 	}catch(err){
 		
 		process.send({ success: false, msg: err.message || err.msg })
+
+		await client_obj.close()
 	
 	}
 }
@@ -132,9 +128,13 @@ async function main() {
 	  		default :
 
 	  			process.send({ success:false,msg:'NO_MATCHED_ACTION' })
-	  	}
 
-		await client_obj.close()
-		
+	  			setTimeout(async ()=>{
+
+					await client_obj.close()
+				
+				})
+
+	  	}
 	})
 }

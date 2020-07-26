@@ -18,57 +18,18 @@ const send = async (client_obj, queue) => {
 
 	let fail = []
 
-	let spam = 1
-
 	for (var i = queue.chat.length - 1; i >= 0; i--) {
 
 		try{
-
+		
 			await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
-
-			if (spam) {
-
-				let count = 0
-
-				while(true) {
-
-					const ret = await client_obj.getChat(queue.chat[i].chatid)
-
-					if (ret.last_message&&ret.last_message.sending_state&&ret.last_message.sending_state.error_message==='USER_BANNED_IN_CHANNEL') {
-
-						throw {code: 400, msg: 'USER_BANNED_IN_CHANNEL'}
-
-						break
-					}
-
-					if (ret.last_message&&!ret.last_message.sending_state) {
-
-						spam = 0
-
-						break
-					}
-
-					count++
-
-					if (count>=30) {
-
-						throw { code: 502, msg: '网络延迟严重' }
-					}
-
-					await sleep(200)
-				}
-			}
-
+		
 		}catch(e){
 
 			if (e.code===5) {
 
 				await client_obj.searchPublicChat(queue.chat[i].chatname)
 			
-			}else if(e.code===400&&e.msg==='USER_BANNED_IN_CHANNEL'){
-
-				throw e
-
 			}else if(e.code===502){
 
 				throw e
@@ -83,7 +44,7 @@ const send = async (client_obj, queue) => {
 			}
 		}
 	}
-
+	
 	return fail 
 }
 
@@ -129,6 +90,28 @@ const main = async () => {
 
 		await client_obj.connect('user')
 
+		client_obj.on('updateMessageSendFailed',async (res)=>{
+
+			let code = res.error_code
+
+			let message = res.error_message
+
+			log.cron_record(`clear_push: ${queue.phone}: ${message}`)
+
+			if (code === 401) {
+
+				await unbind(queue.phone)
+
+				await client_obj.close()
+
+			}else if(code===400&&message==='USER_BANNED_IN_CHANNEL'){
+
+				await spamed(queue.phone)
+
+				await client_obj.close()
+			}
+		})
+
 		const fail = await send(client_obj, queue)
 
 		if (fail.length) {
@@ -137,25 +120,22 @@ const main = async () => {
 		}
 
 	}catch(e){
-		
+
 		if (e.code === 401) {
 
 			await unbind(queue.phone)
-
-		}else if(e.code===400&&e.msg==='USER_BANNED_IN_CHANNEL'){
-
-			await spamed(queue.phone)
 		}
 
 		log.cron_record(`clear_push: ${queue.phone}: ${e.msg?e.msg:e.message}`)
 
+		await client_obj.close()
 	}
 
 	setTimeout(async ()=>{
 
 		await client_obj.close()
 	
-	}, 20000)
+	},15000)
 }
 
 main()

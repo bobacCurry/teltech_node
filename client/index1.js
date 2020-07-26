@@ -14,34 +14,33 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		await client_obj.forwardMessages(-1001259016381,'11111',11111)
+		const msgids = [1,2,3,4,5]
 
-		let count = 0
+		for (var i = msgids.length - 1; i >= 0; i--) {
 
-		while(true) {
+			console.log(i)
 
-			const ret = await client_obj.getChat(-1001259016381)
-
-			console.log(ret.last_message)
-
-			if (!ret.last_message.sending_state) {
-
-				last_message = ret.last_message
-
-				break
-			}
+			try{
 			
-			count++
+				await client_obj.forwardMessages(-10012590163821,601424972,[132115333121])
+			
+			}catch(e){
 
-			if (count>=10) {
-
-				throw { success: false, msg: '网络延迟严重' }
+				console.log(e)
 			}
-
-			await sleep(200)
 		}
 
-		await client_obj.close()
+		client_obj.on('updateMessageSendFailed',(data)=>{
+
+			console.log(data,11111)
+			
+		})
+
+		setTimeout(async ()=>{
+
+			await client_obj.close()
+		
+		},3000)
 
 	} catch(e) {
 	
