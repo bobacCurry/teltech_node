@@ -34,10 +34,6 @@ const send = async (client_obj, queue) => {
 
 				throw e
 
-			}else if(e.message.indexOf('Too Many Requests')!==-1){
-
-				throw e
-
 			}else{
 
 				fail.push(queue.chat[i].chatid)
@@ -96,9 +92,9 @@ const main = async () => {
 
 			let message = res.error_message
 
-			log.cron_record(`clear_push: ${queue.phone}: ${message}`)
-
 			if (code === 401) {
+
+				log.cron_record(`clear_push: ${queue.phone}: ${message}`)
 
 				await unbind(queue.phone)
 
@@ -106,10 +102,11 @@ const main = async () => {
 
 			}else if(code===400&&message==='USER_BANNED_IN_CHANNEL'){
 
+				log.cron_record(`clear_push: ${queue.phone}: ${message}`)
+
 				await spamed(queue.phone)
 
 				await client_obj.close()
-			
 			}
 		})
 
