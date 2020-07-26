@@ -18,15 +18,15 @@ async function main() {
 
 		console.log(ret0)
 
-		let count = 0
+		// const ret = await client_obj.getMessage(-1001159822763,28129099777)
 
-		while(true) {
+		// console.log(ret)
 
-			const ret1 = await client_obj.getChat(-1001159822763)
+		setTimeout(async ()=>{
 
-			console.log(ret1)
-
-		}
+			await client_obj.close()
+		
+		},3000)
 
 	} catch(e) {
 	
