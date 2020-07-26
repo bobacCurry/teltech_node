@@ -22,7 +22,7 @@ let add_push = schedule.scheduleJob('0 * * * * *', async () => {
 
 	try{
 
-		const pushs = await db_push.find({ minute, status: 1 },{ _id: 0,phone:1, chat:1, from_chat_id:1, message_id:1 })
+		const pushs = await db_push.find({ minute, status: 1 },{ _id: 0,phone:1, chat:1, from_chat_id:1, message_id:1,text_type:1, text:1, media:1, caption:1 })
 
 		if (pushs.length) {
 

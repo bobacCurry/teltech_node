@@ -97,48 +97,52 @@ module.exports = {
 			return res.send({ success: false, msg: '飞机非法或已被占用' })
 		}
 
-		if(await cache.get(`pushing_${phone}`)){
+		// if(await cache.get(`pushing_${phone}`)){
 
-			return res.send({ success:false, msg:'保存中，请勿重复发送'})
-		}
+		// 	return res.send({ success:false, msg:'保存中，请勿重复发送'})
+		// }
 
-		await cache.set(`pushing_${phone}`,1)
+		await push_obj.create({ uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, message_id:0, from_chat_id:0, count })
 
-		const n = cp.fork('client/index.js',{ detached:true })
+		await client_obj.updateOne({ phone },{ used: 1 })
 
-		n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
+		// await cache.set(`pushing_${phone}`,1)
 
-		n.on('message', async (m) => {
+		// const n = cp.fork('client/index.js',{ detached:true })
 
-			await cache.del(`pushing_${phone}`)
+		// n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
 
-			if (!m.success||!m.msg) {
+		// n.on('message', async (m) => {
 
-				if (m.msg==='PHONE_UNBINDED') {
+		// 	await cache.del(`pushing_${phone}`)
 
-					await client_obj.updateOne({ phone },{ status: 3 })
-				}
+		// 	if (!m.success||!m.msg) {
 
-				return res.send(m)
-			}
+		// 		if (m.msg==='PHONE_UNBINDED') {
 
-			const message_id = m.msg.id
+		// 			await client_obj.updateOne({ phone },{ status: 3 })
+		// 		}
 
-			const from_chat_id = m.msg.chat_id
+		// 		return res.send(m)
+		// 	}
 
-			try{
+		// 	const message_id = m.msg.id
 
-				await push_obj.create({ uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, message_id, from_chat_id, count })
+		// 	const from_chat_id = m.msg.chat_id
 
-				await client_obj.updateOne({ phone },{ used: 1 })
+		// 	try{
 
-			}catch(e){
+		// 		await push_obj.create({ uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, message_id, from_chat_id, count })
 
-				return next(new Error(e))
-			}
+		// 		await client_obj.updateOne({ phone },{ used: 1 })
+
+		// 	}catch(e){
+
+		// 		return next(new Error(e))
+		// 	}
 
 			return res.send({ success: true, msg: '创建服务成功' })
-		})
+		// })
 	},
 	update: async (req, res, next) => {
 		
@@ -200,55 +204,64 @@ module.exports = {
 			return res.send({ success: false, msg: '文案不得为空' })
 		}
 
-		if(await cache.get(`pushing_${phone}`)){
+		// if(await cache.get(`pushing_${phone}`)){
 
-			return res.send({ success:false, msg:'保存中，请勿重复发送'})
+		// 	return res.send({ success:false, msg:'保存中，请勿重复发送'})
+		// }
+
+		await push_obj.findByIdAndUpdate(_id, { uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, count, message_id:0 , from_chat_id:0 })
+
+		await client_obj.updateOne({ phone },{ used: 1 })
+
+		if (push.phone!==phone) {
+
+			await client_obj.updateOne({ phone: push.phone },{ used: 0 })
 		}
 
-		await cache.set(`pushing_${phone}`,1)
+		// await cache.set(`pushing_${phone}`,1)
 
-		const n = cp.fork('client/index.js',{ detached:true })
+		// const n = cp.fork('client/index.js',{ detached:true })
 
-		n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
+		// n.send({ phone, action: 'push', data: { text_type, text, caption, media } })
 
-		n.on('message', async (m) => {
+		// n.on('message', async (m) => {
 
-			await cache.del(`pushing_${phone}`)
+		// 	await cache.del(`pushing_${phone}`)
 
-			if (!m.success||!m.msg) {
+		// 	if (!m.success||!m.msg) {
 
-				if (m.msg==='PHONE_UNBINDED') {
+		// 		if (m.msg==='PHONE_UNBINDED') {
 
-					await client_obj.updateOne({ phone },{ status: 3 })
+		// 			await client_obj.updateOne({ phone },{ status: 3 })
 				
-					await push_obj.updateOne({ phone }, { status: 0 })
-				}
+		// 			await push_obj.updateOne({ phone }, { status: 0 })
+		// 		}
 
-				return res.send(m)
-			}
+		// 		return res.send(m)
+		// 	}
 
-			const message_id = m.msg.id
+		// 	const message_id = m.msg.id
 
-			const from_chat_id = m.msg.chat_id
+		// 	const from_chat_id = m.msg.chat_id
 
-			try{
+		// 	try{
 
-				await push_obj.findByIdAndUpdate(_id, { uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, count, message_id, from_chat_id })
+		// 		await push_obj.findByIdAndUpdate(_id, { uid, title, chat_type, text_type, phone, chat, text, media, caption, minute, count, message_id, from_chat_id })
 
-				await client_obj.updateOne({ phone },{ used: 1 })
+		// 		await client_obj.updateOne({ phone },{ used: 1 })
 
-				if (push.phone!==phone) {
+		// 		if (push.phone!==phone) {
 
-					await client_obj.updateOne({ phone: push.phone },{ used: 0 })
-				}
+		// 			await client_obj.updateOne({ phone: push.phone },{ used: 0 })
+		// 		}
 
-			}catch(e){
+		// 	}catch(e){
 
-				return next(new Error(e))
-			}
+		// 		return next(new Error(e))
+		// 	}
 
 			return res.send({ success: true, msg: '更新服务成功' })
-		})
+		// })
 	},
 	change_status: async (req, res, next) => {
 	

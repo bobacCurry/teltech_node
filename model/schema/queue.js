@@ -10,7 +10,15 @@ const QueueSchema = new Schema({
 
 	from_chat_id:{ type: Number, required: true },
 
-	message_id:{ type: Number, required: true }
+	message_id:{ type: Number, required: true },
+
+	text_type:{ type: Number, default:0 },
+
+	text:{ type: String, default:'' },
+
+	media:{ type: String, default:'' },
+
+	caption:{ type: String, default:'' }
 	
 },{ versionKey: false })
 

@@ -24,7 +24,18 @@ const send = async (client_obj, queue) => {
 
 		try{
 
-			await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
+			// await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
+
+			if (queue.text_type) {
+
+				let photo = __dirname+'/..'+queue.media
+
+				await client_obj.sendMedia(queue.chat[i].chatid, photo, queue.caption)
+			
+			}else{
+
+				await client_obj.sendMessage(queue.chat[i].chatid, queue.text, 'html')
+			}
 
 			if (spam) {
 
