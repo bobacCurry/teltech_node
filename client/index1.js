@@ -14,11 +14,13 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		await client_obj.sendMessage(-1001159822763,'11111')
+		await client_obj.sendMessage(-1001259016381,'11111')
+
+		let count = 0
 
 		while(true) {
 
-			const ret = await client_obj.getChat(chat.id)
+			const ret = await client_obj.getChat(-1001259016381)
 
 			console.log(ret.last_message)
 

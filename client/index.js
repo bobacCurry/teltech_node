@@ -78,12 +78,12 @@ const push = async (client_obj,data) => {
 			
 			count++
 
-			if (count>=30) {
+			if (count>=20) {
 
 				throw { success: false, msg: '网络延迟严重' }
 			}
 
-			await sleep(100)
+			await sleep(300)
 		}
 
 		process.send({ success: true, msg: last_message })
