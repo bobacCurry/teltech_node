@@ -14,7 +14,7 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		await client_obj.sendMessage(-1001259016381,'11111')
+		await client_obj.forwardMessages(-1001259016381,'11111',11111)
 
 		let count = 0
 
