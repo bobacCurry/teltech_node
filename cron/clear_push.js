@@ -109,6 +109,11 @@ const main = async () => {
 				await spamed(queue.phone)
 
 				await client_obj.close()
+			
+			}else if(message.indexOf('Too Many Requests')!==-1){
+
+				await client_obj.close()
+
 			}
 		})
 
