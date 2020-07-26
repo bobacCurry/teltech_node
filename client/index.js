@@ -77,7 +77,7 @@ const push = async (client_obj,data) => {
 
 		client_obj.on('updateMessageSendFailed',async (res)=>{
 			
-			process.send({ success: false, msg: res.error_message })
+			process.send({ success: true, msg: res.message })
 
 			await client_obj.close()
 		})		
