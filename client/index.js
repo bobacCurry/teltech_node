@@ -78,7 +78,7 @@ const push = async (client_obj,data) => {
 			
 			count++
 
-			if (count>=50) {
+			if (count>=30) {
 
 				throw { success: false, msg: '网络延迟严重' }
 			}

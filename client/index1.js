@@ -14,19 +14,32 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		const ret0 = await client_obj.sendMessage(-1001159822763,'11111')
+		await client_obj.sendMessage(-1001159822763,'11111')
 
-		console.log(ret0)
+		while(true) {
 
-		// const ret = await client_obj.getMessage(-1001159822763,28129099777)
+			const ret = await client_obj.getChat(chat.id)
 
-		// console.log(ret)
+			console.log(ret.last_message)
 
-		setTimeout(async ()=>{
+			if (!ret.last_message.sending_state) {
 
-			await client_obj.close()
-		
-		},3000)
+				last_message = ret.last_message
+
+				break
+			}
+			
+			count++
+
+			if (count>=10) {
+
+				throw { success: false, msg: '网络延迟严重' }
+			}
+
+			await sleep(200)
+		}
+
+		await client_obj.close()
 
 	} catch(e) {
 	
