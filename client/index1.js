@@ -14,7 +14,7 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		await client_obj.forwardMessages(-1001259016381,'11111',11111)
+		await client_obj.sendMessage(-1001259016381,'11111111')
 
 		let count = 0
 
@@ -22,12 +22,19 @@ async function main() {
 
 			const ret = await client_obj.getChat(-1001259016381)
 
-			console.log(ret.last_message)
+			console.log(ret.last_message,1111111111111)
 
 			if (!ret.last_message.sending_state) {
 
 				last_message = ret.last_message
 
+				break
+			}
+
+			if (ret.last_message.sending_state&&ret.last_message.sending_state.error_message) {
+				
+				console.log(ret.last_message.sending_state.error_message,222222222222222)
+				
 				break
 			}
 			
