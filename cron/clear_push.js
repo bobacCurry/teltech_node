@@ -110,10 +110,6 @@ const main = async () => {
 
 				await client_obj.close()
 			
-			}else if(message.indexOf('Too Many Requests')!==-1){
-
-				await client_obj.close()
-
 			}
 		})
 
