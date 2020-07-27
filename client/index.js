@@ -32,7 +32,7 @@ const openChat = async (client_obj,chat_id) => {
 
 	try{
 
-		await client_obj.openChat(chat_id)
+		await client_obj.getChat(chat_id)
 
 	}catch(e){
 
@@ -66,7 +66,6 @@ const push = async (client_obj,data) => {
 		}
 
 		let message = null
-
 
 		client_obj.on('updateMessageSendSucceeded',async (res)=>{
 
