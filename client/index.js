@@ -50,9 +50,9 @@ const push = async (client_obj,data) => {
 
 		const chat = await client_obj.getMe()
 
-		// await openChat(client_obj,chat.id)
+		await openChat(client_obj,chat.id)
 
-		await client_obj.createPrivateChat(chat.id)
+		// await client_obj.createPrivateChat(chat.id)
 
 		if (data.text_type) {
 
