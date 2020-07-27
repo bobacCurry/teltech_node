@@ -52,8 +52,6 @@ const push = async (client_obj,data) => {
 
 		await openChat(client_obj,chat.id)
 
-		// await client_obj.createPrivateChat(chat.id)
-
 		if (data.text_type) {
 
 			const photo = __dirname+'/..'+data.media
@@ -67,16 +65,22 @@ const push = async (client_obj,data) => {
 
 		client_obj.on('updateMessageSendSucceeded',async (res)=>{
 
-			process.send({ success: true, msg: res.message })
+			if(res.message.chat_id == chat.id){
 
-			await client_obj.close()
+				process.send({ success: true, msg: res.message })
+				
+				await client_obj.close()
+			}
 		})
 
 		client_obj.on('updateMessageSendFailed',async (res)=>{
 			
-			process.send({ success: true, msg: res.message })
+			if(res.message.chat_id == chat.id){
 
-			await client_obj.close()
+				process.send({ success: true, msg: res.message })
+				
+				await client_obj.close()
+			}
 		})		
 
 	}catch(err){
