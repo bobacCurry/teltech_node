@@ -52,17 +52,6 @@ const push = async (client_obj,data) => {
 
 		await openChat(client_obj,chat.id)
 
-		if (data.text_type) {
-
-			const photo = __dirname+'/..'+data.media
-
-			await client_obj.sendMedia(chat.id, photo, data.caption)
-		
-		}else{
-
-			await client_obj.sendMessage(chat.id, data.text, 'html')
-		}
-
 		client_obj.on('updateMessageSendSucceeded',async (res)=>{
 
 			if(res.message.chat_id == chat.id){
@@ -81,7 +70,18 @@ const push = async (client_obj,data) => {
 				
 				await client_obj.close()
 			}
-		})		
+		})
+
+		if (data.text_type) {
+
+			const photo = __dirname+'/..'+data.media
+
+			await client_obj.sendMedia(chat.id, photo, data.caption)
+		
+		}else{
+
+			await client_obj.sendMessage(chat.id, data.text, 'html')
+		}
 
 	}catch(err){
 		
