@@ -103,8 +103,8 @@ class Client extends TDLib {
 
 	async createPrivateChat(id) {
 		return this.request('createPrivateChat', {
-			user_id: id
-			// force:true
+			user_id: id,
+			force:true
 		})
 	}
 
