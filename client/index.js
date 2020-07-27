@@ -52,7 +52,7 @@ const push = async (client_obj,data) => {
 
 		await openChat(client_obj,chat.id)
 
-		let send_ret = ''
+		// await client_obj.createPrivateChat(chat.id)
 
 		if (data.text_type) {
 
@@ -64,8 +64,6 @@ const push = async (client_obj,data) => {
 
 			await client_obj.sendMessage(chat.id, data.text, 'html')
 		}
-
-		let message = null
 
 		client_obj.on('updateMessageSendSucceeded',async (res)=>{
 
