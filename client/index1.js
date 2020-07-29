@@ -41,7 +41,7 @@ async function main() {
 			
 			if(message.chat_id == chat.id){
 
-				console.log(message.content)
+				console.log(message)
 				
 			}
 		})
