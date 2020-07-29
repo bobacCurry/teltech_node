@@ -37,6 +37,15 @@ async function main() {
 			}
 		})
 
+		client_obj.on('updateMessageSendFailed',async ({message})=>{
+			
+			if(message.chat_id == chat.id){
+
+				console.log(message.content)
+				
+			}
+		})
+
 	} catch(e) {
 	
 		console.log('ERROR', e)
