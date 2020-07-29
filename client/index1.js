@@ -4,11 +4,20 @@ const sleep = require('../controller/common/sleep')
 
 const config = require('../config')
 
+const phone = process.argv[2]
+
+if (!phone) {
+
+	console.log('没有相应手机号')
+
+	process.exit(1)
+}
+
 main()
 
 async function main() {
 
-	const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone:'601133751860' })
+	const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone })
 
 	try {
 	
