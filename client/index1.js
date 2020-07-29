@@ -14,33 +14,19 @@ async function main() {
 	
 		await client_obj.connect('user')
 
-		const msgids = [1,2,3,4,5]
+		const chat = await client_obj.searchPublicChat('SpamBot')
 
-		for (var i = msgids.length - 1; i >= 0; i--) {
+		await client_obj.sendMessage(chat.id,'/start')		
 
-			console.log(i)
+		client_obj.on('updateNewMessage',async ({message})=>{
 
-			try{
-			
-				await client_obj.forwardMessages(-10012590163821,601424972,[132115333121])
-			
-			}catch(e){
+			if (message.chat_id == chat.id) {
 
-				console.log(e)
+				console.log(message.content)
+
+				await client_obj.close()
 			}
-		}
-
-		client_obj.on('updateMessageSendFailed',(data)=>{
-
-			console.log(data,11111)
-			
 		})
-
-		setTimeout(async ()=>{
-
-			await client_obj.close()
-		
-		},3000)
 
 	} catch(e) {
 	

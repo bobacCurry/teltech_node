@@ -116,6 +116,9 @@ class TDLib extends EventEmitter {
             case 'updateMessageSendFailed':
             	this.emit('updateMessageSendFailed', response)
             break
+            case 'updateNewMessage':
+            	this.emit('updateNewMessage', response)
+            break
             default: 
                 this.handleUpdate(response)
         }	
