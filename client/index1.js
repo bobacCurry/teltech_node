@@ -19,17 +19,19 @@ async function main() {
 
 	const client_obj = new Client({ apiId: config.env.apiId, apiHash: config.env.apiHash, phone })
 
+	const spam_id = 178220800
+
 	try {
 	
 		await client_obj.connect('user')
+	
+		const chat = await client_obj.createPrivateChat(spam_id)
 
-		const chat = await client_obj.searchPublicChat('SpamBot')
-
-		await client_obj.sendMessage(chat.id,'/start')		
+		await client_obj.sendMessage(spam_id,'/start')		
 
 		client_obj.on('updateNewMessage',async ({message})=>{
 
-			if (message.chat_id == chat.id) {
+			if (message.chat_id == spam_id) {
 
 				console.log(message.content)
 
