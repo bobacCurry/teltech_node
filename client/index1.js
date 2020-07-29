@@ -27,8 +27,6 @@ async function main() {
 	
 		const chat = await client_obj.createPrivateChat(spam_id)
 
-		await client_obj.sendMessage(spam_id,'/start')		
-
 		client_obj.on('updateNewMessage',async ({message})=>{
 
 			if (message.chat_id == spam_id) {
@@ -38,6 +36,8 @@ async function main() {
 				await client_obj.close()
 			}
 		})
+
+		await client_obj.sendMessage(spam_id,'/start')		
 
 	} catch(e) {
 	
