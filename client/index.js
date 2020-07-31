@@ -66,8 +66,15 @@ const push = async (client_obj,data) => {
 			
 			if(res.message.chat_id == chat.id){
 
-				process.send({ success: true, msg: res.message })
-				
+				if(res.error_code&&res.error_code==401){
+
+					process.send({ success: false, msg: 'PHONE_UNBINDED' })
+
+				}else{
+					
+					process.send({ success: true, msg: res.message })
+				}
+
 				await client_obj.close()
 			}
 		})
