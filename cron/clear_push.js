@@ -94,7 +94,7 @@ const main = async () => {
 
 			if (code === 401) {
 
-				log.cron_record(`clear_push: ${queue.phone}: ${message}`)
+				log.cron_record(`clear_push: ${e.code} ${queue.phone}: ${message}`)
 
 				await unbind(queue.phone)
 
@@ -102,7 +102,7 @@ const main = async () => {
 
 			}else if(code===400&&message==='USER_BANNED_IN_CHANNEL'){
 
-				log.cron_record(`clear_push: ${queue.phone}: ${message}`)
+				log.cron_record(`clear_push: ${e.code} ${queue.phone}: ${message}`)
 
 				await spamed(queue.phone)
 
@@ -124,7 +124,7 @@ const main = async () => {
 			await unbind(queue.phone)
 		}
 
-		log.cron_record(`clear_push: ${queue.phone}: ${e.msg?e.msg:e.message}`)
+		log.cron_record(`clear_push: ${queue.phone}: ${e.code} ${e.msg?e.msg:e.message}`)
 
 		await client_obj.close()
 	}
