@@ -28,7 +28,15 @@ const send = async (client_obj, queue) => {
 
 			if (e.code===5) {
 
-				await client_obj.searchPublicChat(queue.chat[i].chatname)
+				try {
+
+					await client_obj.searchPublicChat(queue.chat[i].chatname)
+				
+				}catch(e){
+
+					fail.push(queue.chat[i].chatid)
+						
+				}
 			
 			}else if(e.code===502){
 
