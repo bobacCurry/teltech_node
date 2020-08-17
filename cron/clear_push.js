@@ -108,7 +108,7 @@ const main = async () => {
 
 				await client_obj.close()
 
-			}else if(code===400&&message==='USER_BANNED_IN_CHANNEL'){
+			}else if(message==='USER_BANNED_IN_CHANNEL'){
 
 				log.cron_record(`clear_push: ${e.code} ${queue.phone}: ${message}`)
 
