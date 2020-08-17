@@ -38,13 +38,13 @@ const send = async (client_obj, queue) => {
 						
 				}
 			
-			}else if(e.code===502){
+			}else if(e.code===403){
 
-				throw e
+				fail.push(queue.chat[i].chatid)
 
 			}else{
 
-				fail.push(queue.chat[i].chatid)
+				throw e
 			}
 		}
 	}
