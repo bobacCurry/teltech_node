@@ -38,7 +38,7 @@ const send = async (client_obj, queue) => {
 						
 				}
 			
-			}else if(e.code===403){
+			}else if(e.code===403||e.code===400){
 
 				fail.push(queue.chat[i].chatid)
 
