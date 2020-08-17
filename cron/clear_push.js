@@ -38,7 +38,7 @@ const send = async (client_obj, queue) => {
 						
 				}
 			
-			}else if(e.code===400||e.code===403){
+			}else if(e.code===400||e.code===403||e.code===406){
 
 				fail.push(queue.chat[i].chatid)
 
@@ -115,7 +115,7 @@ const main = async () => {
 				await spamed(queue.phone)
 
 				await client_obj.close()
-				
+
 			}else{
 
 				log.cron_record(`clear_push: ${e.code} ${queue.phone}: ${message}`)
@@ -145,7 +145,7 @@ const main = async () => {
 
 		await client_obj.close()
 	
-	},30000)
+	},40000)
 }
 
 main()
