@@ -174,6 +174,27 @@ class Client extends TDLib {
         })
     }
 
+    async sendMessageAlbum(chat_id,photos = [],caption = ''){
+    	const input_message_contents = photos.map((item,key)=>{
+    		return { 
+    			'@type': 'inputMessagePhoto', 
+				photo: {
+					'@type': 'inputFileLocal', 
+					path: item
+				}, 
+				caption:{
+					'@type': 'formattedText', 
+					text: !key?caption:''
+				}
+			}
+    	})
+    	return this.request('sendMessageAlbum', {
+            chat_id, 
+            input_message_contents,
+            reply_to_message_id: 0, 
+        })
+    }
+
     async joinChat(chat_id){
     	return this.request('joinChat', {
     		chat_id: chat_id

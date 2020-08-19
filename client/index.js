@@ -81,9 +81,13 @@ const push = async (client_obj,data) => {
 
 		if (data.text_type) {
 
-			const photo = __dirname+'/..'+data.media
+			const photos = data.media.map((media)=>{
 
-			await client_obj.sendMedia(chat.id, photo, data.caption)
+				return 	__dirname + '/..' + media			
+
+			})
+
+			await client_obj.sendMessageAlbum(chat.id, photos, data.caption)
 		
 		}else{
 

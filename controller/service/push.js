@@ -85,7 +85,7 @@ module.exports = {
 
 		minute = [ minute, minute+gap, minute+2*gap, minute+3*gap ].slice(0,count)
 
-		if ((!text_type&&(!text||!text.trim()))||(text_type&&!media)) {
+		if ((!text_type&&(!text||!text.trim()))||(text_type&&!media.length)) {
 
 			return res.send({ success: false, msg: '文案不得为空' })
 		}
@@ -169,7 +169,7 @@ module.exports = {
 
 		title = title? title: ''
 
-		media = media? media: ''
+		media = media.length? media: []
 
 		caption = caption? caption: ''
 

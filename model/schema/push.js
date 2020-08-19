@@ -22,7 +22,7 @@ const PushSchema = new Schema({
 
 	text:{ type: String, default:'' },
 
-	media:{ type: String, default:'' },
+	media:{ type: Array, default:[] },
 
 	caption:{ type: String, default:'' },
 
