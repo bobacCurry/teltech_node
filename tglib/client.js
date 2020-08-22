@@ -135,7 +135,8 @@ class Client extends TDLib {
 		return this.request('forwardMessages', {
 			chat_id,
 			from_chat_id,
-			message_ids
+			message_ids,
+			as_album: true
 		})
 	}
 

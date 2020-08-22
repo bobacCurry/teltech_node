@@ -52,13 +52,32 @@ const push = async (client_obj,data) => {
 
 		await openChat(client_obj,chat.id)
 
+		let lock = false
+
+		let chat_id
+
+		let id = []
+
 		client_obj.on('updateMessageSendSucceeded',async (res)=>{
 
 			if(res.message.chat_id == chat.id){
 
-				process.send({ success: true, msg: res.message })
-				
-				await client_obj.close()
+				chat_id = chat.id
+
+				id.push(res.message.id)
+
+				if(!lock){
+
+					lock = true
+
+					setTimeout(async ()=>{
+					
+						process.send({ success: true, msg: { id, chat_id } })
+					
+						await client_obj.close()
+					
+					},1000)
+				}
 			}
 		})
 

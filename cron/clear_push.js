@@ -21,8 +21,8 @@ const send = async (client_obj, queue) => {
 	for (var i = queue.chat.length - 1; i >= 0; i--) {
 
 		try{
-		
-			await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, [queue.message_id])
+
+			await client_obj.forwardMessages(queue.chat[i].chatid, queue.from_chat_id, queue.message_id)
 		
 		}catch(e){
 

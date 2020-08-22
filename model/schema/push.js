@@ -18,7 +18,7 @@ const PushSchema = new Schema({
 
 	from_chat_id:{ type: Number, required: true },
 
-	message_id:{ type: Number, required: true },
+	message_id:{ type: Array, default:[] },
 
 	text:{ type: String, default:'' },
 
