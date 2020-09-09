@@ -4,8 +4,6 @@ const path = require('path')
 
 const config = require('../../config.js')
 
-const PICURL = config.env.picurl
-
 const COMMONPATH = 'static'
 
 const exist_or_build = dir => {

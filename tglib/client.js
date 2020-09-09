@@ -226,6 +226,17 @@ class Client extends TDLib {
 		})
 	}
 
+	async getCallbackQueryAnswer(chat_id,message_id,data) {
+		return this.request('getCallbackQueryAnswer', {
+			chat_id,
+			message_id,
+			payload: { 
+				'@type': 'callbackQueryPayloadData', 
+				data
+			}
+		})
+	}
+
     /**
      * @param {string} text 
      * @param {string} type text|markdown|html 

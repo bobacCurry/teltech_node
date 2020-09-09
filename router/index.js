@@ -2,17 +2,21 @@ const account = require('./account/index')
 
 const service = require('./service/index')
 
-const admin = require('./admin/index')
-
 const common = require('./common/index')
 
-module.exports = function(app) {
+const admin = require('./admin/index')
 
-	admin(app)
+const bots =  require('./bots/index')
+
+module.exports = function(app) {
 
 	account(app)
 
 	service(app)
 
 	common(app)
+
+	admin(app)
+
+	bots(app)
 }
