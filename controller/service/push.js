@@ -73,7 +73,7 @@ module.exports = {
 
 		let gap = 60/count
 
-		if (count<1||count>4) {
+		if (count<1||count>6) {
 
 			count = 1
 		}
@@ -83,7 +83,7 @@ module.exports = {
 			return res.send({ success: false, msg: '时间提交错误' })
 		}
 
-		minute = [ minute, minute+gap, minute+2*gap, minute+3*gap ].slice(0,count)
+		minute = [ minute, minute+gap, minute+2*gap, minute+3*gap, minute+4*gap, minute+5*gap ].slice(0,count)
 
 		if ((!text_type&&(!text||!text.trim()))||(text_type&&!media.length)) {
 
@@ -183,7 +183,7 @@ module.exports = {
 
 		let gap = 60/count
 
-		if (count<1||count>4) {
+		if (count<1||count>6) {
 
 			count = 1
 		}
@@ -193,7 +193,7 @@ module.exports = {
 			return res.send({ success: false, msg: '时间提交错误' })
 		}
 
-		minute = [ minute, minute+gap, minute+2*gap, minute+3*gap ].slice(0,count)
+		minute = [ minute, minute+gap, minute+2*gap, minute+3*gap, minute+4*gap, minute+5*gap ].slice(0,count)
 
 		if ((!text_type&&(!text||!text.trim()))||(text_type&&!media)) {
 
