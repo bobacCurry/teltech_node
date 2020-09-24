@@ -27,6 +27,8 @@ module.exports = {
 			return res.send({ success: false,msg: '请输入群信息' })
 		}
 
+		chatname = chatname.toLowerCase()
+
 		try{
 
 			const exist = await db_chat.findOne({ chatname, type })
