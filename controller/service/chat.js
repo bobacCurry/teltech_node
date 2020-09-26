@@ -2,6 +2,8 @@ const cp = require('child_process')
 
 const db_chat = require('../../model/schema/chat')
 
+const db_update_chat = require('../../model/schema/update_chat')
+
 const config = require('../../config')
 
 const axios = require('axios')
@@ -68,6 +70,22 @@ module.exports = {
 		try{
 
 			const data = await db_chat.find({ type, status:1 },{ group: 0, status: 0, _id: 0 })
+
+			return res.send({ success: true, msg: data })
+
+		}catch(err){
+
+			return next(new Error(err))
+		
+		}
+	},
+	get_update_chat: async (req, res, next)=>{
+
+		const type = req.params.type?req.params.type:0
+
+		try{
+
+			const data = await db_update_chat.find({ type },{ chatname: 1 })
 
 			return res.send({ success: true, msg: data })
 
