@@ -44,6 +44,13 @@ let clear_push = schedule.scheduleJob('*/7 * * * * *', async (error, stdout, std
 		return 
 	}
 
+	const queue = await db_queue.findOne({})
+
+	if (!queue) {
+
+		return 
+	}
+
 	clear_push_childnum++
 
 	const clear_push_cron = child_process.fork('cron/clear_push.js',{ detached:true })
