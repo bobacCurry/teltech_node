@@ -69,7 +69,7 @@ module.exports = {
 
 		minute = minute? Number(minute): 0
 
-		count = count? Number(count): 4
+		count = count? Number(count): 6
 
 		let gap = 60/count
 
@@ -179,7 +179,7 @@ module.exports = {
 
 		minute = minute? Number(minute): 0
 
-		count = count? Number(count): 4
+		count = count? Number(count): 6
 
 		let gap = 60/count
 
