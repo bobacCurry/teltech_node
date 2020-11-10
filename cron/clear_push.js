@@ -145,7 +145,7 @@ const main = async () => {
 
 		await client_obj.close()
 	
-	},50000)
+	},40000)
 }
 
 main()
