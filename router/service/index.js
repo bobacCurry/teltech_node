@@ -13,5 +13,7 @@ module.exports = function(app) {
 	app.use('/service/order', require('./order'))
 
 	app.use('/service/client', require('./client'))
+
+	app.use('/service/person', require('./person'))
 	
 }

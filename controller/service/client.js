@@ -99,6 +99,21 @@ module.exports = {
 			return next(new Error(err))
 		}
 	},
+	get_nomal: async (req, res, next)=>{
+
+		const uid = req.user._id
+
+		try{
+
+			const data = await db_client.find({ uid , used: 0, status: { $in: [ 0, 1 ] } })
+
+			return res.send({ success:true, msg:data })
+
+		}catch(err){
+
+			return next(new Error(err))
+		}
+	},
 	restore: async (req, res, next)=>{
 
 		const phone = req.params.phone

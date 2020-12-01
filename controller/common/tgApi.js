@@ -10,6 +10,12 @@ module.exports = {
 
 		return axios.get(api,{params})
 	},
+	getUpdates: (bot,params = {}) => {
+
+		const api = host + bot + '/getUpdates'
+
+		return axios.get(api,{params})
+	},
 	setWebhook: (bot,params = {}) => {
 
 		const api = host + bot + '/setWebhook'
@@ -25,6 +31,12 @@ module.exports = {
 	getWebhookInfo: (bot,params = {}) => {
 
 		const api = host + bot + '/getWebhookInfo'
+
+		return axios.get(api,{params})
+	},
+	getChat: (bot,params = {}) => {
+
+		const api = host + bot + '/getChat'
 
 		return axios.get(api,{params})
 	},

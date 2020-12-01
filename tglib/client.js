@@ -83,6 +83,17 @@ class Client extends TDLib {
 		})
 	}
 
+	async getSupergroupMembers(supergroup_id, offset = 0, limit = 200) {
+		
+		return this.request('getSupergroupMembers', { supergroup_id, offset, limit })
+	}
+
+
+	async getChatMember(chat_id,user_id) {
+
+		return this.request('getChatMember', { chat_id, user_id })
+	}
+
 	async _deleteChat(id) {
 		const chat = await this.getChat(id)
 		switch (chat.type['@type']) {

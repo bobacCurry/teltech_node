@@ -2,6 +2,8 @@ const db_order = require('../../model/schema/order')
 
 const db_push = require('../../model/schema/push')
 
+const money = require('../account/money')
+
 module.exports = {
 
 	add_order: async (req, res, next)=>{
@@ -31,6 +33,8 @@ module.exports = {
 			}
 
 			await db_order.create({ uid, pid, days, memo })
+
+			await money.inc_money(uid,400)
 
 			return res.send({ success: true, msg: '订单提交成功' })
 

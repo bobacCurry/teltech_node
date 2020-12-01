@@ -57,10 +57,18 @@ module.exports = {
 	},
 	get_info: async (req, res, next) => {
 
-		const user = req.user
+		const uid = req.user._id
 
-		return res.send({ success: true, msg: user })
+		try{
 
+	      	const user = await db_user.findById(uid,'_id name money avatar access')
+
+	      	return res.send({ success: true, msg: user })
+
+	    }catch(err){
+
+	      	return next(new Error(err))
+	    }
 	},
 	reset_password: async (req, res, next) => {
 

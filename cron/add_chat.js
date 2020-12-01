@@ -8,14 +8,7 @@ const chatbot = config.env.chatbot
 
 const bot_url = config.bot_url
 
-const chats = [
-	"clark666com",
-	"edihome",
-	"feilibingHR",
-	"FLB_CN",
-	"ZP_CN",
-	"fuyequn"
-]
+const chats = []
 
 const add_chat = async (name,type,auth) => {
 
@@ -60,7 +53,7 @@ const main = async () => {
 
 	for(let i = 0; i < chats.length; i++){
 
-		await add_chat(chats[i],0,1)
+		await add_chat(chats[i],4,0)
 	}
 }
 

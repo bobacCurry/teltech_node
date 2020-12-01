@@ -14,6 +14,8 @@ router.post('/del_user_client/:phone', jwt.decode, client.del_user_client)
 
 router.get('/get_notused_client', jwt.decode, client.get_not_used)
 
+router.get('/get_nomal_client', jwt.decode, client.get_nomal)
+
 router.post('/restore/:phone', jwt.decode, client.restore)
 
 router.get('/get_add_chat/:page', jwt.decode, client.get_add_chat)

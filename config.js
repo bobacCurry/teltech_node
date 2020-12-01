@@ -13,4 +13,6 @@ let sms = {
 	naion:{ api:'http://api.isms.ihuyi.com/webservice/isms.php?method=Submit', account:'I47778485', password:'8498c45654e435c53222ba96d9e83c74' }
 }
 
-module.exports = { env, bot_url, sms }
+const private_channel = 'private_msg_channel'
+
+module.exports = { env, bot_url, sms, private_channel }
