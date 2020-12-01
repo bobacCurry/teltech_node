@@ -8,7 +8,32 @@ const chatbot = config.env.chatbot
 
 const bot_url = config.bot_url
 
-const chats = []
+const chats = [
+	"xXx369",
+	"qiu440",
+	"feihu886",
+	"yesuzhuroupu",
+	"TG021",
+	"TG128",
+	"aquanV5",
+	"TGG88888",
+	"anwei3",
+	"sdynews",
+	"diguo1",
+	"idc9999",
+	"jucan924",
+	"bocaizpcom",
+	"TG815",
+	"TG5214",
+	"bianmin1",
+	"HWC689",
+	"gdgsd33",
+	"jpz520",
+	"TG550",
+	"STQJ5Fby9H",
+	"meosjzk",
+	"JRTT1"
+]
 
 const add_chat = async (name,type,auth) => {
 
