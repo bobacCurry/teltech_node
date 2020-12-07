@@ -37,7 +37,7 @@ let add_push = schedule.scheduleJob('0 * * * * *', async () => {
 	}
 })
 
-let clear_push = schedule.scheduleJob('*/7 * * * * *', async (error, stdout, stderr) => {
+let clear_push = schedule.scheduleJob('*/3 * * * * *', async (error, stdout, stderr) => {
 
 	if((clear_push_childnum+join_chat_childnum)>=maxchild){
 
