@@ -9,30 +9,31 @@ const chatbot = config.env.chatbot
 const bot_url = config.bot_url
 
 const chats = [
-	"xXx369",
-	"qiu440",
-	"feihu886",
-	"yesuzhuroupu",
-	"TG021",
-	"TG128",
-	"aquanV5",
-	"TGG88888",
-	"anwei3",
-	"sdynews",
-	"diguo1",
-	"idc9999",
-	"jucan924",
-	"bocaizpcom",
-	"TG815",
-	"TG5214",
-	"bianmin1",
-	"HWC689",
-	"gdgsd33",
-	"jpz520",
-	"TG550",
-	"STQJ5Fby9H",
-	"meosjzk",
-	"JRTT1"
+	 "jobfinder1",
+	 "fv00013",
+	 "tuitui88",
+	 "AaisHr",
+	 "qwe6661",
+	 "heigongsi",
+	 "aifeizhaopin",
+	 "clarkhrzp",
+	 "overseasjob999",
+	 "vvy968",
+	 "haobot1143",
+	 "helloword0xF",
+	 "weipinquning",
+	 "dvdsvsdvsdvdsvdsvdsvd",
+	 "judibai",
+	 "fdfsdfsd",
+	 "bozp8",
+	 "php521",
+	 "xccazc",
+	 "limaotianxiadiyi",
+	 "jobstreet8",
+	 "jobs8866",
+	 "zhaopin11",
+	 "Vieclamphilippine686",
+	 "yafei20"
 ]
 
 const add_chat = async (name,type,auth) => {
@@ -78,7 +79,7 @@ const main = async () => {
 
 	for(let i = 0; i < chats.length; i++){
 
-		await add_chat(chats[i],4,0)
+		await add_chat(chats[i],0,0)
 	}
 }
 

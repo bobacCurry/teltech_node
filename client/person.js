@@ -88,7 +88,7 @@ async function send(client_obj, target, text, no_admin, send_list, from_chat_id,
 
 	for (var i = 0; i < send_list.length; i++) {
 
-		if (spam) {
+		if (spam||(i>=10)) {
 
 			break
 		}
