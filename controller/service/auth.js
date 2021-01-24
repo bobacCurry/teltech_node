@@ -76,7 +76,7 @@ module.exports = {
 		
 		cache.set(`check_${phone}`,code)
 
-		cache.expire('key',200)
+		cache.expire(`check_${phone}`,200)
 
 		return res.send({ success:true, msg:'发送成功' })
 	},

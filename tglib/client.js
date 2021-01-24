@@ -12,6 +12,19 @@ class Client extends TDLib {
 			username: username
 		})
 	}
+
+	async searchPublicChats(query){
+		return this.request('searchPublicChats', {
+			query
+		})
+	}
+
+	async searchChats(query,limit){
+		return this.request('searchChats', {
+			query,
+			limit
+		})
+	}
 	
 	async getOption(name){
 		return this.request('getOption',{
@@ -48,11 +61,18 @@ class Client extends TDLib {
 		})
 	}
 
-	async getChats() {
+	async leaveChat(chat_id) {
+		return this.request('leaveChat', {
+			chat_id
+		})
+	}
+
+	async getChats(limit) {
+		// const limit = Math.floor(Math.random() * 9999999)
 		return this.request('getChats', {
 			offset_order: '9223372036854775807',
-			offset_chat_id: 0,
-			limit: Math.floor(Math.random() * 9999999)
+			offset_chat_id: -1001406791647,
+			limit
 		})
 	}
 

@@ -9,31 +9,38 @@ const chatbot = config.env.chatbot
 const bot_url = config.bot_url
 
 const chats = [
-	 "jobfinder1",
-	 "fv00013",
-	 "tuitui88",
-	 "AaisHr",
-	 "qwe6661",
-	 "heigongsi",
-	 "aifeizhaopin",
-	 "clarkhrzp",
-	 "overseasjob999",
-	 "vvy968",
-	 "haobot1143",
-	 "helloword0xF",
-	 "weipinquning",
-	 "dvdsvsdvsdvdsvdsvdsvd",
-	 "judibai",
-	 "fdfsdfsd",
-	 "bozp8",
-	 "php521",
-	 "xccazc",
-	 "limaotianxiadiyi",
-	 "jobstreet8",
-	 "jobs8866",
-	 "zhaopin11",
-	 "Vieclamphilippine686",
-	 "yafei20"
+	"gulinaza520",
+	"asia_southeast1",
+	"bbsrtcq",
+	"beijing021651",
+	"biecology",
+	"bole10",
+	"bole3",
+	"bolepin09",
+	"bolepin7",
+	"boya9898",
+	"bozhaopin02",
+	"canglang004",
+	"cyzp2",
+	"dibai8888",
+	"dl2rssrqz",
+	"feilvbinshuairen",
+	"feilvbinzhipin3",
+	"feilvbinzhongjie",
+	"feirenshizhaopinqiuzhi",
+	"fengshan1",
+	"flb001",
+	"flbggqz",
+	"flbjob",
+	"flbjob365",
+	"flbjobs",
+	"flvjob",
+	"guanggaoqun",
+	"guanggaoqun1",
+	"haiwaibocaiqiuzhi",
+	"haiwaigaoxin",
+	"haiwaizhaop",
+	"haopengyou"
 ]
 
 const add_chat = async (name,type,auth) => {
@@ -63,11 +70,13 @@ const add_chat = async (name,type,auth) => {
 		if (result.type!=='supergroup') {
 
 			console.log('该群不是公共群，不能发广告')
+		
+		}else{
+			
+			await db_chat.create({ type, auth, chatid: result.id, chatname: chatname, status: 1 })
+
+			console.log('群信息添加成功：'+chatname)
 		}
-
-		await db_chat.create({ type, auth, chatid: result.id, chatname: chatname, status: 1 })
-
-		console.log('群信息添加成功：'+chatname)
 
 	}catch({ response }){
 
@@ -79,7 +88,7 @@ const main = async () => {
 
 	for(let i = 0; i < chats.length; i++){
 
-		await add_chat(chats[i],0,0)
+		await add_chat(chats[i],1,0)
 	}
 }
 
