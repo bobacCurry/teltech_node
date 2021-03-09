@@ -180,8 +180,8 @@ class Client extends TDLib {
 				}, 
 				caption:{
 					'@type': 'formattedText', 
-					text: caption
-				}
+					text: await this.parseTextEntities(caption, 'html')
+				} 
 			}
         })
     }
