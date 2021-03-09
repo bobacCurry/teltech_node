@@ -187,6 +187,9 @@ class Client extends TDLib {
     }
 
     async sendMessageAlbum(chat_id,photos = [],caption = ''){
+
+    	const text = await this.parseTextEntities(caption, 'html')
+
     	const input_message_contents = photos.map((item,key)=>{
     		return { 
     			'@type': 'inputMessagePhoto', 
@@ -196,7 +199,7 @@ class Client extends TDLib {
 				}, 
 				caption:{
 					'@type': 'formattedText', 
-					text: caption//!key?caption:''
+					text: text//!key?caption:''
 				}
 			}
     	})
