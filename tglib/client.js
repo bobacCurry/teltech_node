@@ -198,7 +198,7 @@ class Client extends TDLib {
 					path: item
 				}, 
 				caption:{
-					'@type': 'formattedText', 
+					'@type': 'inputMessageText', 
 					text: text//!key?caption:''
 				}
 			}
