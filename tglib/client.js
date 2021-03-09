@@ -196,7 +196,7 @@ class Client extends TDLib {
 				}, 
 				caption:{
 					'@type': 'formattedText', 
-					text: caption//!key?caption:''
+					text: !key?caption:''
 				}
 			}
     	})
