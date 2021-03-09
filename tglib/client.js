@@ -180,14 +180,13 @@ class Client extends TDLib {
 				}, 
 				caption:{
 					'@type': 'formattedText', 
-					text: await this.parseTextEntities(caption, 'html')
+					text: caption
 				} 
 			}
         })
     }
 
     async sendMessageAlbum(chat_id,photos = [],caption = ''){
-    	const td = this
     	const input_message_contents = photos.map((item,key)=>{
     		return { 
     			'@type': 'inputMessagePhoto', 
@@ -197,8 +196,7 @@ class Client extends TDLib {
 				}, 
 				caption:{
 					'@type': 'formattedText', 
-					text: await td.parseTextEntities(caption, 'html')
-					// text: !key?caption:''
+					text: caption//!key?caption:''
 				}
 			}
     	})
