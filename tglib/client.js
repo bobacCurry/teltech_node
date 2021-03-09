@@ -196,7 +196,8 @@ class Client extends TDLib {
 				}, 
 				caption:{
 					'@type': 'formattedText', 
-					text: !key?caption:''
+					text: await this.parseTextEntities(caption, 'html')
+					// text: !key?caption:''
 				}
 			}
     	})
