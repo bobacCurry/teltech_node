@@ -58,9 +58,9 @@ module.exports = {
 
 			return res.send({ success: true,msg: '群信息添加成功' })
 
-		}catch(err){
+		}catch({ response }){
 
-			console.log(err)
+			console.log(response.data)
 
 			return next(new Error('群信息添加失败'))
 		}
