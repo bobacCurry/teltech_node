@@ -60,7 +60,7 @@ module.exports = {
 
 		}catch({ response }){
 
-			console.log(response.data)
+			console.log(chatname,response.data)
 
 			return next(new Error('群信息添加失败'))
 		}
