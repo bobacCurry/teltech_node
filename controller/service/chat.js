@@ -60,6 +60,8 @@ module.exports = {
 
 		}catch(err){
 
+			console.log(err)
+
 			return next(new Error('群信息添加失败'))
 		}
 	},
